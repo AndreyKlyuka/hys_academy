@@ -1,0 +1,72 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.course__image {
+	width: 270px;
+	height: 364px;
+	background-position: center;
+	background-size: cover;
+}
+.course__image_design {
+	background-image: url('./images/courses/course-design.png');
+}
+.course__image_marketing {
+	background-image: url('./images/courses/course-marketing.jpg');
+}
+.course__image_web-design {
+	background-image: url('./images/courses/course-web-design.png');
+}
+
+.prefers__item {
+	width: 197px;
+	height: 197px;
+	background-position: center;
+	background-size: cover;
+	background-blend-mode: soft-light;
+}
+.prefers__item_design {
+	background-image: url('./images/courses/course-design.png');
+	background-color: rgba(101, 131, 255, 0.8);
+}
+.prefers__item_web-design {
+	background-image: url('./images/courses/course-web-design.png');
+	background-color: rgba(240, 199, 45, 0.8);
+}
+.prefers__item_marketing {
+	background-image: url('./images/courses/prefers-marketing.png');
+	background-color: rgba(148, 87, 243, 0.8);
+}
+.prefers__item_education {
+	background-image: url('./images/courses/prefers-education.png');
+	background-color: rgba(254, 95, 96, 0.8);
+}
+
+.get-started {
+	height: 406px;
+	width: 100%;
+	background-position: center;
+	background-size: cover;
+	background-blend-mode: soft-light;
+	background-image: url('./images/courses/course-design.png');
+	background-color: rgba(69, 82, 156, 0.95);
+}
+
+.post__image {
+	width: 328px;
+	height: 160px;
+	background-position: center;
+	background-size: cover;
+}
+.post__image_web-design {
+	background-image: url('./images/courses/course-web-design.png');
+}
+.post__image_education {
+	background-image: url('./images/courses/prefers-education.png');
+}
+
+.footer__icon {
+	fill: none;
+	stroke: #1e1e1e;
+}
