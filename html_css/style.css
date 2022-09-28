@@ -92,7 +92,14 @@ body {
 .education__image {
 	position: relative;
 	width: 375px;
+	height: 377px;
 	left: -24px;
+	top: -15px;
+}
+.education__title {
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 44px;
 }
 /* course */
 .course__image {
