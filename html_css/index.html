@@ -4,17 +4,33 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="reset.css" />
 		<link rel="stylesheet" href="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Academy Landing Page | HYS Enterprise</title>
 	</head>
 	<body>
 		<div class="wrapper">
 			<header class="header">
 				<div class="header__container">
-					<svg class="header__logo" width="53px" height="24px">
-						<use href="./images/icons.svg#icon-logo"></use>
-					</svg>
-					<nav class="header__nav">
+					<div class="header__menu">
+						<div class="header__burger">
+							<div class="header__burger-item"></div>
+						</div>
+						<svg class="header__logo" width="53px" height="24px">
+							<use href="./images/icons.svg#icon-logo"></use>
+						</svg>
+					</div>
+					<div class="header__action">
+						<button class="btn btn-blue" type="button">Explore</button>
+					</div>
+
+					<!-- <nav class="header__nav">
 						<ul class="header__nav-list">
 							<li class="header__nav-item">
 								<a class="header__link" href="#categories">Categories</a>
@@ -29,16 +45,28 @@
 								<a class="header__link" href="#degrees">Degrees</a>
 							</li>
 						</ul>
-						<button class="btn" type="button">Explore</button>
-					</nav>
-					<div class="header__background">
+					</nav> -->
+
+					<!-- <div class="header__background-icons">
 						<img
 							class="header__background-icons"
 							width="746"
 							src="./images/union.png"
 							alt=""
 						/>
-					</div>
+					</div> -->
+				</div>
+				<div class="header__background">
+					<img
+						class="header__background-bigger"
+						src="/html_css/images/education/header-bigger.svg"
+						alt=""
+					/>
+					<img
+						class="header__background-smaller"
+						src="/html_css/images/education/header-smaller.svg"
+						alt=""
+					/>
 				</div>
 			</header>
 
@@ -46,6 +74,13 @@
 				<section class="education">
 					<div class="education__container">
 						<div class="education__content">
+							<div class="education__image">
+								<img
+									width="403"
+									src="./images/education/girl.svg"
+									alt="girl write code"
+								/>
+							</div>
 							<div class="education__text">
 								<h1 class="education_title">
 									Education is the most powerfull weapon
@@ -56,16 +91,9 @@
 									For all of your needs. Read More Get started
 								</p>
 								<div class="education__btn">
-									<button class="btn" type="button">Read more</button>
-									<a class="btn btn-link" href="#form">Get started</a>
+									<button class="btn btn-blue" type="button">Read more</button>
+									<a class="btn btn-green" href="#form">Get started</a>
 								</div>
-							</div>
-							<div class="education__image">
-								<img
-									width="403"
-									src="./images/education/boy.png"
-									alt="boy writes"
-								/>
 							</div>
 						</div>
 						<div class="education__sponsors">
@@ -375,7 +403,7 @@
 										</li>
 									</ul>
 								</div>
-								<button class="btn" type="button">Read More</button>
+								<button class="btn btn-blue" type="button">Read More</button>
 							</div>
 							<div class="tour__image">
 								<img src="./images/tour/two-girls.png" alt="two girls work" />
@@ -589,10 +617,6 @@
 								<img
 									src="./images/customers/cirlce.png"
 									alt="background cirlce"
-								/>
-								<img
-									src="./images/customers/rectangle.png"
-									alt="background rectangle"
 								/>
 								<img src="./images/customers/girls-work.png" alt="girls work" />
 							</div>
