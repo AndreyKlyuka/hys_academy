@@ -26,6 +26,15 @@ body {
 	font-size: 12px;
 	line-height: 16px;
 }
+.btn-reset {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 .btn-blue {
 	background-color: var(--blue-primary);
 	color: var(--white);
@@ -39,9 +48,7 @@ body {
 	background-color: var(--green-secondary);
 	padding: 0;
 }
-.wrapper {
-	/* padding: 24px; */
-}
+
 .section-title {
 	font-weight: 700;
 	font-size: 26px;
@@ -703,6 +710,10 @@ body {
 	gap: 13px;
 	padding: 12px 0px;
 }
+.get-started__link {
+	color: inherit;
+	text-decoration: inherit;
+}
 /* blog */
 .blog {
 	padding-bottom: 84px;
@@ -807,7 +818,6 @@ body {
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
-	width: 327px;
 	height: 44px;
 	padding: 14px 12px;
 	color: var(--black-secondary);
