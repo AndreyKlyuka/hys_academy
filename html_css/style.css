@@ -1,9 +1,12 @@
 :root {
 	--blue-primary: #1b63f0;
 	--blue-secondary: #bad1ff;
+	--blue-hover: rgba(27, 99, 240, 0.8);
 
 	--green-primary: #97f5cd;
 	--green-secondary: #d6fae7;
+	--green-hover: #49cd94;
+
 	--white: #ffffff;
 	--black-primary: #000000;
 	--black-secondary: #5c5c5c;
@@ -44,6 +47,10 @@ body {
 	color: var(--black-primary);
 	text-decoration: none;
 }
+.btn-transparent {
+	border: 1px solid var(--white);
+	background: transparent;
+}
 .btn-green_blog {
 	background-color: var(--green-secondary);
 	padding: 0;
@@ -79,6 +86,9 @@ body {
 .header__burger {
 	position: relative;
 	margin-right: 33px;
+}
+.header__logo {
+	fill: var(--blue-primary);
 }
 .header__burger-item,
 .header__burger-item::after,
@@ -275,12 +285,13 @@ body {
 	height: 40px;
 	border-radius: 20px;
 	background-color: var(--white);
-	box-shadow: 0px 4px 16px #e2edfb;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .slide-img {
+	fill: none;
+	stroke: #64be97;
 	width: 24px;
 	height: 24px;
 }
@@ -834,11 +845,11 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 20px;
 }
 .blog__posts-pagination-item_active {
-	border: 1px solid var(--green-secondary);
-	box-shadow: 0px 4px 16px #e2edfb;
-	border-radius: 20px;
+	border: 1px solid #64be97;
+	box-shadow: 0;
 }
 .form__container {
 	display: flex;
@@ -848,6 +859,7 @@ body {
 }
 .form__container input {
 	border: 0;
+	outline: 0;
 	background-color: #f3f6fc;
 	border-radius: 22px;
 	font-weight: 500;
@@ -1259,4 +1271,61 @@ body {
 	.events__featured {
 		position: static;
 	}
+}
+
+/* states of inputs */
+
+.btn-blue:hover {
+	background-color: var(--blue-hover);
+	color: var(--white);
+}
+.btn-form:hover {
+	background-color: var(--green-hover);
+	box-shadow: 0px 0px 12px rgba(75, 202, 103, 0.8);
+}
+.btn-transparent:hover {
+	background-color: rgba(255, 255, 255, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.8);
+}
+/* input:focus {
+	border: 2px solid #1b63f0;
+} */
+
+.form__container input:focus {
+	border: 2px solid var(--blue-primary);
+}
+.form__container input:invalid {
+	border: 1px solid #f15b5b;
+}
+.btn-form:focus {
+	outline: 0;
+	border: 0;
+}
+.courses__card:hover {
+	box-shadow: 0px 6px 20px rgba(27, 99, 240, 0.4);
+}
+.header__logo:hover {
+	fill: var(--black-primary);
+}
+.slide:hover {
+	background-color: #64be97;
+	color: var(--white);
+	box-shadow: 0px 4px 16px #e2edfb;
+}
+.slide:hover .slide-img {
+	fill: none;
+	stroke: var(--white);
+}
+.blog__posts-pagination-item:hover {
+	box-shadow: 0px 4px 16px #e2edfb;
+}
+.footer__company-item:hover {
+	color: var(--green-primary);
+}
+.footer__icon:hover {
+	fill: none;
+	stroke: var(--green-primary);
+}
+.footer__item:hover {
+	color: var(--blue-primary);
 }
