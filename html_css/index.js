@@ -4,5 +4,4 @@ import { Slider } from './scripts/slider.js'
 
 paginator('.blog__posts', paginationData)
 
-const slider = new Slider('.prefers__slider')
-slider.initSlider()
+const slider = new Slider('.prefers__slider', paginationData)
