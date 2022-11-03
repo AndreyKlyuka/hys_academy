@@ -540,7 +540,7 @@ body {
 }
 .prefers__description {
 	text-align: center;
-	padding-bottom: 40px;
+	padding-bottom: 32px;
 }
 .prefers__slider {
 	display: flex;
@@ -549,9 +549,19 @@ body {
 	gap: 20px;
 	padding-bottom: 80px;
 }
-.prefers__item + .prefers__item {
+.prefers__list {
+	width: 207px;
+	display: flex;
+	gap: 20px;
+	overflow: scroll;
+	overflow-y: hidden;
+}
+.prefers__list::-webkit-scrollbar {
 	display: none;
 }
+/* .prefers__item + .prefers__item {
+	display: none;
+} */
 .prefers__item {
 	width: 207px;
 	height: 197px;
@@ -562,6 +572,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex: 0 0 auto;
 }
 .prefers__item-title {
 	font-weight: 600;
@@ -829,12 +840,6 @@ body {
 	line-height: 24px;
 	padding-bottom: 16px;
 }
-.post__image_web-design {
-	background-image: url('./images/courses/course-web-design.png');
-}
-.post__image_education {
-	background-image: url('./images/courses/prefers-education.png');
-}
 .blog__post-pagination {
 	display: flex;
 	flex-direction: row;
@@ -1072,6 +1077,10 @@ body {
 		margin: 0 auto;
 		max-width: 1024px;
 	}
+	.prefers__item {
+		width: 197px;
+		height: 197px;
+	}
 	.marking-title_prefers {
 		width: 100%;
 		text-align: center;
@@ -1090,12 +1099,11 @@ body {
 		width: 767px;
 	}
 	.prefers__list {
-		display: flex;
-		gap: 20px;
+		width: 631px;
 	}
-	.prefers__item + .prefers__item {
+	/* .prefers__item + .prefers__item {
 		display: flex;
-	}
+	} */
 	.prefers__slider {
 		padding-bottom: 180px;
 	}
@@ -1225,8 +1233,12 @@ body {
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-	.prefers__item:nth-child(2n) {
+	/* .prefers__item:nth-child(2n) {
 		display: none;
+	} */
+	.prefers__item {
+		width: 197px;
+		height: 197px;
 	}
 	.blog__post-pagination {
 		margin-left: 20px;
