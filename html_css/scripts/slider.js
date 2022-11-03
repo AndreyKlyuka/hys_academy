@@ -65,7 +65,6 @@ export class Slider {
 							this.cardWidth = 197
 							this.cardsCount = 3
 						}
-						console.log('works')
 					}.bind(this),
 					1000
 				)
