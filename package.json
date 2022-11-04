@@ -1,0 +1,19 @@
+{
+  "name": "hys_academy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyKlyuka/hys_academy.git"
+  },
+  "author": "Kliuka Andrii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyKlyuka/hys_academy/issues"
+  },
+  "homepage": "https://github.com/AndreyKlyuka/hys_academy#readme"
+}
