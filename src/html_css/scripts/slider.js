@@ -78,6 +78,9 @@ export class Slider {
 			this.#sliderElements.insertAdjacentHTML('afterbegin', markupEl)
 		})
 	}
+	clearData() {
+		this.#sliderElements.innerHTML = null
+	}
 
 	createElement(data) {
 		return data.map(
