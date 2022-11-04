@@ -1,19 +1,38 @@
 {
-  "name": "hys_academy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AndreyKlyuka/hys_academy.git"
-  },
-  "author": "Kliuka Andrii",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AndreyKlyuka/hys_academy/issues"
-  },
-  "homepage": "https://github.com/AndreyKlyuka/hys_academy#readme"
+	"name": "hys_academy",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "webpack-dev-server --open",
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AndreyKlyuka/hys_academy.git"
+	},
+	"author": "Kliuka Andrii",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/AndreyKlyuka/hys_academy/issues"
+	},
+	"homepage": "https://github.com/AndreyKlyuka/hys_academy#readme",
+	"devDependencies": {
+		"@babel/core": "^7.19.6",
+		"@babel/preset-env": "^7.19.4",
+		"babel-loader": "^9.1.0",
+		"clean-webpack-plugin": "^4.0.0",
+		"css-loader": "^6.7.1",
+		"css-minimizer-webpack-plugin": "^4.2.2",
+		"html-webpack-plugin": "^5.5.0",
+		"mini-css-extract-plugin": "^2.6.1",
+		"style-loader": "^3.3.1",
+		"terser-webpack-plugin": "^5.3.6",
+		"webpack": "^5.74.0",
+		"webpack-cli": "^4.10.0",
+		"webpack-dev-server": "^4.11.1"
+	},
+	"dependencies": {
+		"jquery": "^3.6.1"
+	}
 }
