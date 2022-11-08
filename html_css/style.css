@@ -810,12 +810,20 @@ body {
 	background-size: cover;
 	top: -24px;
 }
+.post__image img {
+	width: 328px;
+	height: 160px;
+}
 .blog__avatar {
 	width: 48px;
 	height: 48px;
 }
 .post__title {
-	width: 220px;
+	width: 90%;
+	height: 48px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 24px;
@@ -1270,6 +1278,21 @@ body {
 	}
 	.events__featured {
 		position: static;
+	}
+}
+@media screen and (min-width: 1024px) {
+	.post__image {
+		width: 347px;
+		height: 160px;
+	}
+	.post__image img {
+		width: 347px;
+	}
+	.blog__posts {
+		justify-content: center;
+	}
+	.post__title {
+		width: 320px;
 	}
 }
 
