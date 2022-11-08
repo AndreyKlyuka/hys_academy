@@ -1,6 +1,7 @@
 export function paginator(selector, data) {
 	initPaginator(data, selector)
 }
+
 function initPaginator(data, selector) {
 	updateCards(data, selector, false)
 	const paginationBtns = document.querySelectorAll(
@@ -10,7 +11,6 @@ function initPaginator(data, selector) {
 		btn.addEventListener('click', updateCards(data, selector))
 	})
 }
-
 const updateCards = function (data, selector, isHandler = true) {
 	const cardsContainer = document.querySelector(selector)
 	if (isHandler === false) {
@@ -29,6 +29,16 @@ const updateCards = function (data, selector, isHandler = true) {
 		this.classList.add('blog__posts-pagination-item_active')
 	}
 }
+
+function useMarkup(data, paginationBtn, container) {
+	const markup = createMarkup(
+		data.slice(paginationBtn * 2 - 2, 2 * paginationBtn)
+	)
+	markup.forEach((markupEl) =>
+		container.insertAdjacentHTML('afterbegin', markupEl)
+	)
+}
+
 function createMarkup(data) {
 	return data.map(
 		(el) => `<div class="blog__post">
@@ -42,7 +52,7 @@ function createMarkup(data) {
                         </div>
                     </div>
                     <div class="blog__post-right">
-                        <div class="post__image post__image_web-design">
+                        <div class="post__image">
                             <img
                                 src=${el.thumbnailUrl}
                             />
@@ -55,13 +65,5 @@ function createMarkup(data) {
                         </button>
                     </div>
                 </div>`
-	)
-}
-function useMarkup(data, paginationBtn, container) {
-	const markup = createMarkup(
-		data.slice(paginationBtn * 2 - 2, 2 * paginationBtn)
-	)
-	markup.forEach((markupEl) =>
-		container.insertAdjacentHTML('afterbegin', markupEl)
 	)
 }
