@@ -5,16 +5,22 @@ import { photosData } from '../data/photos-data.js'
 import { paginator } from './pagination.js'
 import { Slider } from './slider.js'
 import { Storage } from './storage.js'
+import { Select } from './select.js'
 
 export class App {
+	#slider
 	init() {
+		//select init
+		const select = new Select('.prefers__select', this.onAlbumChange.bind(this))
 		// storage init
 		const storage = new Storage(photosData)
 		const storageData = storage.getSliderData()
 
 		// pagination and slider init
 		paginator('.blog__posts', storageData)
-		const slider = new Slider('.prefers__slider', storageData)
+		this.#slider = new Slider('.prefers__slider', storageData)
+
+
 
 		//slick slider init
 		$(document).ready(function () {
@@ -85,4 +91,20 @@ export class App {
 			storage.clearFormEmail()
 		})
 	}
+	onAlbumChange(albumId) {
+		fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				this.#slider.clearData()
+				this.#slider.setData(data.slice(0, 5))
+
+			})
+			.catch((error) => {
+				console.log('Error: ', error);
+			});
+	}
+
+
 }

@@ -551,6 +551,25 @@ body {
 	text-align: center;
 	padding-bottom: 32px;
 }
+.prefers__slider-select {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 20px;
+}
+.prefers__select {
+	width: 200px;
+	height: 48px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	border: 0;
+	padding: 14px 12px;
+	background-color: #f3f6fc;
+	border-radius: 22px;
+}
+
 .prefers__slider {
 	display: flex;
 	justify-content: center;
