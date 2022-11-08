@@ -27,34 +27,16 @@
 						</svg>
 					</div>
 					<div class="header__action">
+						<nav class="header__nav">
+							<ul class="header__nav-list">
+								<li class="header__nav-item">Features</li>
+								<li class="header__nav-item">Courses</li>
+								<li class="header__nav-item">Explore</li>
+								<li class="header__nav-item">Blog</li>
+							</ul>
+						</nav>
 						<button class="btn btn-blue" type="button">Explore</button>
 					</div>
-
-					<!-- <nav class="header__nav">
-						<ul class="header__nav-list">
-							<li class="header__nav-item">
-								<a class="header__link" href="#categories">Categories</a>
-							</li>
-							<li class="header__nav-item">
-								<a class="header__link" href="#course">Course</a>
-							</li>
-							<li class="header__nav-item">
-								<a class="header__link" href="#explore">Explore</a>
-							</li>
-							<li class="header__nav-item">
-								<a class="header__link" href="#degrees">Degrees</a>
-							</li>
-						</ul>
-					</nav> -->
-
-					<!-- <div class="header__background-icons">
-						<img
-							class="header__background-icons"
-							width="746"
-							src="./images/union.png"
-							alt=""
-						/>
-					</div> -->
 				</div>
 				<div class="header__background">
 					<img
@@ -83,9 +65,7 @@
 								</h1>
 								<p class="education__description section-text">
 									A bank is a financial institution accepts deposits from public
-									and creates credit.
-									<br />
-									For all of your needs.
+									and creates credit. For all of your needs.
 								</p>
 								<div class="education__btn">
 									<button class="btn btn-blue" type="button">Read more</button>
@@ -136,7 +116,7 @@
 					<div class="advantages__container">
 						<div class="advantages__content">
 							<h2 class="advantages__title section-title marking-title">
-								Why choose us?
+								Our features
 							</h2>
 							<div class="advantages__items">
 								<div class="advantages__items-row">
@@ -176,7 +156,7 @@
 										</div>
 
 										<h3 class="advantages__item-title">Affordability</h3>
-										<p class="advantages__description">
+										<p class="advantages__description section-text">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 											sed do eiusmod.A bank is a financial institution accepts
 											deposits from public and creates credit.
@@ -190,7 +170,7 @@
 										</div>
 
 										<h3 class="advantages__item-title">Social</h3>
-										<p class="advantages__description">
+										<p class="advantages__description section-text">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 											sed do eiusmod.A bank is a financial institution accepts
 											deposits from public and creates credit.
@@ -394,14 +374,6 @@
 									</svg>
 								</button>
 							</div>
-							<!-- <div class="courses__background">
-								<img
-									class="courses__background-icons"
-									width="746"
-									src="./images/union.png"
-									alt=""
-								/>
-							</div> -->
 						</div>
 					</div>
 				</section>
@@ -675,11 +647,13 @@
 								veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 							</p>
 							<div class="prefers__slider">
-								<div class="prefers__slide slide prefers__slide_left">
+								<button
+									class="btn-reset prefers__slide slide prefers__slide_left"
+								>
 									<svg class="slide-img" width="40px" height="40px">
 										<use href="./images/icons.svg#icon-slide-left"></use>
 									</svg>
-								</div>
+								</button>
 								<div class="prefers__list">
 									<div class="prefers__item prefers__item_design">
 										<h3 class="prefers__item-title">Graphic Design</h3>
@@ -694,11 +668,13 @@
 										<h3 class="prefers__item-title">Education</h3>
 									</div>
 								</div>
-								<div class="prefers__slide slide prefers__slide_right">
+								<button
+									class="btn-reset prefers__slide slide prefers__slide_right"
+								>
 									<svg class="slide-img" width="40px" height="40px">
 										<use href="./images/icons.svg#icon-slide-right"></use>
 									</svg>
-								</div>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -772,7 +748,7 @@
 								</div>
 								<div class="get-started__buttons">
 									<button class="btn btn-green">Apply Now</button>
-									<button class="btn btn-blue" type="button">
+									<button class="btn btn-transparent" type="button">
 										Request Service
 									</button>
 								</div>
@@ -882,7 +858,7 @@
 							</div>
 							<div class="blog__form form" id="form">
 								<form action="#">
-									<div class="form__container">
+									<div class="form__container" data-error="empty field">
 										<input type="text" placeholder="Name Surname" />
 										<input type="tel" placeholder="Phone" />
 										<input type="email" placeholder="Enter your email..." />
@@ -900,7 +876,7 @@
 					<div class="footer__content">
 						<div class="footer__links">
 							<div class="footer__icon">
-								<svg width="53px" height="24px">
+								<svg class="header__logo" width="53px" height="24px">
 									<use href="./images/icons.svg#icon-logo"></use>
 								</svg>
 							</div>
@@ -919,7 +895,7 @@
 									</li>
 								</ul>
 							</div>
-							<div class="footer__links">
+							<div class="footer__help-links">
 								<h3 class="footer__company-title">Help Links</h3>
 								<ul class="footer__company-list">
 									<li class="footer__company-item">
