@@ -13,6 +13,7 @@
 			rel="stylesheet"
 		/>
 		<title>Academy Landing Page | HYS Enterprise</title>
+		<script defer src="bundle.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -41,12 +42,12 @@
 				<div class="header__background">
 					<img
 						class="header__background-bigger"
-						src="/html_css/images/education/header-bigger.svg"
+						src="../html_css/images/education/header-bigger.svg"
 						alt=""
 					/>
 					<img
 						class="header__background-smaller"
-						src="/html_css/images/education/header-smaller.svg"
+						src="../html_css/images/education/header-smaller.svg"
 						alt=""
 					/>
 				</div>
@@ -731,10 +732,10 @@
 							</div>
 							<div class="customer__background">
 								<div class="customer__background-figure">
-									<img src="/html_css/images/customers/figure.png" alt="" />
+									<img src="../html_css/images/customers/figure.png" alt="" />
 								</div>
 								<div class="customer__background-cirlce">
-									<img src="/html_css/images/customers/cirlce.png" alt="" />
+									<img src="../html_css/images/customers/cirlce.png" alt="" />
 								</div>
 							</div>
 						</div>
@@ -830,12 +831,24 @@
 									<div class="blog__posts-pagination-item">3</div>
 								</div>
 							</div>
-							<div class="blog__form form" id="form">
-								<form action="#">
+							<div class="blog__form form">
+								<form id="form">
 									<div class="form__container" data-error="empty field">
-										<input type="text" placeholder="Name Surname" />
-										<input type="tel" placeholder="Phone" />
-										<input type="email" placeholder="Enter your email..." />
+										<input
+											class="blog__form-name"
+											type="text"
+											placeholder="Name Surname"
+										/>
+										<input
+											class="blog__form-phone"
+											type="tel"
+											placeholder="Phone"
+										/>
+										<input
+											class="blog__form-email"
+											type="email"
+											placeholder="Enter your email..."
+										/>
 									</div>
 									<button class="btn btn-form" type="submit">Send</button>
 								</form>
@@ -948,5 +961,10 @@
 			</footer>
 		</div>
 	</body>
+	<!-- <script
+		src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+		crossorigin="anonymous"
+	></script> -->
 	<script src="index.js" type="module"></script>
 </html>
