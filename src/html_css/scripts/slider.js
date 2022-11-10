@@ -22,19 +22,18 @@ export class Slider {
 		this.initButtons()
 	}
 	initButtons() {
-		const sliderBtns = this.#slider.querySelectorAll('button')
+		this.#slider.addEventListener('click', (event) => {
+			const target = event.target.closest('button')
 
-		sliderBtns.forEach((btn) => {
-			btn.addEventListener('click', (btn) => {
-				this.checkSliderCounter(this.#sliderElements)
+			if (!target) return null
 
-				btn.currentTarget.classList.contains('prefers__slide_right')
-					? this.slidesCounter++
-					: this.slidesCounter--
+			this.checkSliderCounter(this.#sliderElements)
 
-				this.scrollElement(this.#sliderElements)
-				// console.log(this.cardWidth)
-			})
+			target.classList.contains('prefers__slide_right')
+				? this.slidesCounter++
+				: this.slidesCounter--
+
+			this.scrollElement(this.#sliderElements)
 		})
 	}
 
