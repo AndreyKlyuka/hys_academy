@@ -7,11 +7,13 @@ import { Slider } from './slider.js'
 import { Storage } from './storage.js'
 import { Select } from './select.js'
 
+
 export class App {
 	#slider
 	init() {
 		//select init
 		const select = new Select('.prefers__select', this.onAlbumChange.bind(this))
+
 		// storage init
 		const storage = new Storage(photosData)
 		const storageData = storage.getSliderData()
@@ -19,8 +21,6 @@ export class App {
 		// pagination and slider init
 		paginator('.blog__posts', storageData)
 		this.#slider = new Slider('.prefers__slider', storageData)
-
-
 
 		//slick slider init
 		$(document).ready(function () {
@@ -64,7 +64,6 @@ export class App {
 				storage.setFormName(event.target.value)
 			}, 750)
 		)
-
 		phoneInput.addEventListener(
 			'input',
 			debounce((event) => {
@@ -89,6 +88,10 @@ export class App {
 			storage.clearFormName()
 			storage.clearFormPhone()
 			storage.clearFormEmail()
+
+			nameInput.value = ''
+			phoneInput.value = ''
+			emailInput.value = ''
 		})
 	}
 	onAlbumChange(albumId) {
@@ -105,6 +108,4 @@ export class App {
 				console.log('Error: ', error);
 			});
 	}
-
-
 }
