@@ -1,6 +1,9 @@
+import coursesAvatar from '../images/courses/courses-avatar.png'
+
 export function paginator(selector, data) {
 	initPaginator(data, selector)
 }
+
 
 function initPaginator(data, selector) {
 	const paginator = document.querySelector(selector)
@@ -50,7 +53,7 @@ function createMarkup(data) {
                         <h4 class="post__about">DESIGN</h4>
                         <div class="blog__avatar">
                             <img
-                                src="./images/courses/courses-avatar1.png"
+                                src=${coursesAvatar}
                                 alt="teacher avatar"
                             />
                         </div>

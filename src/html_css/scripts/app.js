@@ -1,12 +1,13 @@
+import $ from 'jquery'
+import './tools/slick.min.js'
 import { debounce } from './tools/debounce.js'
-
-import { photosData } from '../data/photos-data.js'
 
 import { paginator } from './pagination.js'
 import { Slider } from './slider.js'
 import { Storage } from './storage.js'
 import { Select } from './select.js'
 
+import { photosData } from '../data/photos-data.js'
 
 export class App {
 	#slider
@@ -43,7 +44,7 @@ export class App {
 						},
 					},
 					{
-						breakpoint: 1440,
+						breakpoint: 1980,
 						settings: {
 							slidesToShow: 3,
 							slidesToScroll: 1,
