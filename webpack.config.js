@@ -23,7 +23,7 @@ module.exports = {
 	context:
 		path.resolve(__dirname, 'src'),
 	entry: {
-		index: ['@babel/polyfill', './html_css/index.js']
+		index: ['@babel/polyfill', './html_css/index.ts']
 	},
 	output: {
 		filename: 'bundle.js',
@@ -64,13 +64,18 @@ module.exports = {
 			},
 			{
 				test: /\.m?js$/i,
-				exclude: /(node_modules|bower_components)/,
+				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
 						presets: ['@babel/preset-env']
 					}
 				}
+			},
+			{
+				test: /\.tsx?$/,
+				use: ['babel-loader', 'ts-loader'],
+				exclude: /node_modules/,
 			},
 			{
 				test: /\.(jpe?g|png|webp|gif|svg)$/i,
@@ -81,6 +86,9 @@ module.exports = {
 	optimization: {
 		minimize: true,
 		minimizer: devMode ? undefined : [new CssMinimizerPlugin(), new TerserPlugin()],
+	},
+	resolve: {
+		extensions: ['.ts', '.tsx', '.js']
 	},
 
 }
