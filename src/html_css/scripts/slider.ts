@@ -3,17 +3,17 @@ import debounce from 'lodash.debounce'
 import IPhotos from '../models/photos'
 
 export class Slider {
-	_slider: Element
-	_sliderElements: Element
+	_slider: HTMLElement
+	_sliderElements: HTMLElement
 	_data: IPhotos[]
 	cardsCount: number
 	cardWidth: number
 	slidesCounter: number
 
 	constructor(selector: string, data: IPhotos[]) {
-		this._slider = <Element>document.querySelector(selector)
+		this._slider = <HTMLElement>document.querySelector(selector)
 		this._data = data
-		this._sliderElements = this._slider.children[1]
+		this._sliderElements = <HTMLElement>this._slider.children[1]
 
 		this.cardsCount = 3
 		this.cardWidth = 197
@@ -30,7 +30,7 @@ export class Slider {
 
 	initButtons() {
 		this._slider.addEventListener('click', (event) => {
-			const target = (<Element>event.target).closest('button')
+			const target = (<HTMLElement>event.target).closest('button')
 
 			if (!target) return null
 
@@ -44,7 +44,7 @@ export class Slider {
 		})
 	}
 
-	scrollElement(selector: Element) {
+	scrollElement(selector: HTMLElement) {
 		selector.scrollTo({
 			top: 0,
 			left: (this.cardWidth + 20) * this.slidesCounter,
@@ -52,7 +52,7 @@ export class Slider {
 		})
 	}
 
-	checkSliderCounter(selector: Element) {
+	checkSliderCounter(selector: HTMLElement) {
 		if (Math.floor(selector.scrollLeft / this.cardWidth) !== this.slidesCounter)
 			this.slidesCounter = Math.floor(selector.scrollLeft / this.cardWidth)
 	}
@@ -79,7 +79,7 @@ export class Slider {
 	}
 
 	setData(data: IPhotos[]) {
-		const markup = this.createElement(data)
+		const markup: string[] = this.createElement(data)
 		markup.forEach((markupEl) => {
 			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
 		})

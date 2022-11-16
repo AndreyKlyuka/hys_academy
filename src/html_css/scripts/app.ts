@@ -27,12 +27,12 @@ export class App {
 		new Select('.prefers__select', this.onAlbumChange.bind(this))
 
 		// storage init
-		this._storage = new Storage(photosData)
-		const storageData = this._storage.getSliderData()
+		// this._storage = new Storage(photosData)
+		// const storageData = this._storage.getSliderData()
 
 		// pagination and slider init
-		paginator('.blog__posts', storageData)
-		this._slider = new Slider('.prefers__slider', storageData)
+		paginator('.blog__posts', this._storageData)
+		// this._slider = new Slider('.prefers__slider', storageData)
 
 		//slick slider init
 		$(document).ready(function () {
@@ -79,7 +79,7 @@ export class App {
 		phoneInput.value = this._storage.getFormInput('formPhone')
 		emailInput.value = this._storage.getFormInput('formEmail')
 
-		form?.addEventListener('submit', (event) => {
+		form.addEventListener('submit', (event) => {
 			event.preventDefault()
 
 			this._storage.clearFormInput('formName')
@@ -93,13 +93,13 @@ export class App {
 	}
 
 	onAlbumChange(albumId: number) {
-		fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`)
-			.then((response) => {
-				return response.json()
-			})
+		fetch(
+			`https://jsonplaceholder.typicode.com/albums/${albumId}/photos?_start=0&_limit=5`
+		)
+			.then((response) => response.json())
 			.then((data) => {
 				this._slider.clearData()
-				this._slider.setData(data.slice(0, 5))
+				this._slider.setData(data)
 			})
 			.catch((error) => {
 				console.log('Error: ', error)

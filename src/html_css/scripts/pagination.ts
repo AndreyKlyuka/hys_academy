@@ -11,9 +11,9 @@ function initPaginator(data: IPhotos[], selector: string) {
 	updateCards(data, selector, false)
 
 	paginator?.addEventListener('click', (event) => {
-		const target = event.target as Element
+		const target = <HTMLElement>event.target
 		if (target.tagName === 'BUTTON') {
-			updateCards(data, selector).call(target)
+			updateCards(data, selector)?.call(target)
 		}
 	})
 }
@@ -21,15 +21,17 @@ const updateCards = function (
 	data: IPhotos[],
 	selector: string,
 	isHandler = true
-): Function {
-	const cardsContainer = document.querySelector(selector) as Element
+): Function | undefined {
+	const cardsContainer = <HTMLElement>document.querySelector(selector)
 
 	if (!isHandler) useMarkup(data, 1, cardsContainer)
 
-	return function (this: Element) {
-		const currentCards = document.querySelectorAll('.blog__post')
-		const activeButton = document.querySelector(
-			'.blog__posts-pagination-item_active'
+	return function (this: HTMLElement) {
+		const currentCards = <NodeListOf<HTMLElement>>(
+			document.querySelectorAll('.blog__post')
+		)
+		const activeButton = <HTMLElement>(
+			document.querySelector('.blog__posts-pagination-item_active')
 		)
 
 		currentCards.forEach((card) => card.remove())
@@ -39,8 +41,12 @@ const updateCards = function (
 	}
 }
 
-function useMarkup(data: IPhotos[], paginationBtn: number, container: Element) {
-	const markup = createMarkup(
+function useMarkup(
+	data: IPhotos[],
+	paginationBtn: number,
+	container: HTMLElement
+) {
+	const markup: string[] = createMarkup(
 		data.slice(paginationBtn * 2 - 2, 2 * paginationBtn)
 	)
 	markup.forEach((markupEl) =>

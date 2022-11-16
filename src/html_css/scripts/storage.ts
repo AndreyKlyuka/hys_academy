@@ -14,11 +14,11 @@ export class Storage {
 		localStorage.setItem('sliderData', JSON.stringify(this.data))
 	}
 	getSliderData(): IPhotos[] {
-		return JSON.parse(localStorage.getItem('sliderData') as string)
+		return JSON.parse(<string>localStorage.getItem('sliderData'))
 	}
 
 	getFormInput(item: string): string {
-		return localStorage.getItem(item) as string
+		return <string>localStorage.getItem(item)
 	}
 
 	setFormInput(item: string, value: string) {
