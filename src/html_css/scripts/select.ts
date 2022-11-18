@@ -1,20 +1,18 @@
-enum Selects {
-	'Select 1' = 1,
-	'Select 2',
-	'Select 3',
-}
+import { Selects } from '../models/@types/select.enum'
+import ISelect from '../models/select.model'
 
-export class Select {
-	_selector: Element
+export default class Select implements ISelect {
+	readonly _selector: HTMLElement
+
 	constructor(selector: string, onSelectChange: Function) {
-		this._selector = <Element>document.querySelector(selector)
+		this._selector = <HTMLElement>document.querySelector(selector)
 		this.init(onSelectChange)
-		console.log(Selects)
 	}
-	init(onSelectChange: Function) {
+	
+	private init(onSelectChange: Function) {
 		this._selector.addEventListener('input', (event) => {
 			onSelectChange(
-				Selects[(<HTMLInputElement>event.target).value as keyof typeof Selects]
+				Selects[<keyof typeof Selects>(<HTMLInputElement>event.target).value]
 			)
 		})
 	}
