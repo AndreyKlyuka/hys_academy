@@ -1,8 +1,9 @@
 import debounce from 'lodash.debounce'
 
 import IPhotos from '../models/@types/photos.interface'
+import ISlider from '../models/slider.model'
 
-export default class Slider {
+export default class Slider implements ISlider {
 	_slider: HTMLElement
 	_sliderElements: HTMLElement
 	_data: IPhotos[]
