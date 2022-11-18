@@ -1,9 +1,11 @@
 import debounce from 'lodash.debounce'
 
+import ISlider from '../models/slider.model'
+
 import IPhotos from '../models/@types/photos.interface'
 
-export default class Slider {
-	_slider: HTMLElement
+export default class Slider implements ISlider {
+	_slider
 	_sliderElements: HTMLElement
 	_data: IPhotos[]
 	cardsCount: number
@@ -28,7 +30,18 @@ export default class Slider {
 		this.initButtons()
 	}
 
-	initButtons() {
+	setData(data: IPhotos[]) {
+		const markup: string[] = this.createElement(data)
+		markup.forEach((markupEl) => {
+			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
+		})
+	}
+
+	clearData() {
+		this._sliderElements.innerHTML = ''
+	}
+
+	private initButtons() {
 		this._slider.addEventListener('click', (event) => {
 			const target = (<HTMLElement>event.target).closest('button')
 
@@ -44,7 +57,7 @@ export default class Slider {
 		})
 	}
 
-	scrollElement(selector: HTMLElement) {
+	private scrollElement(selector: HTMLElement) {
 		selector.scrollTo({
 			top: 0,
 			left: (this.cardWidth + 20) * this.slidesCounter,
@@ -52,12 +65,12 @@ export default class Slider {
 		})
 	}
 
-	checkSliderCounter(selector: HTMLElement) {
+	private checkSliderCounter(selector: HTMLElement) {
 		if (Math.floor(selector.scrollLeft / this.cardWidth) !== this.slidesCounter)
 			this.slidesCounter = Math.floor(selector.scrollLeft / this.cardWidth)
 	}
 
-	checkSliderEvents(this: Slider) {
+	private checkSliderEvents(this: Slider) {
 		const sliderEvents: string[] = ['DOMContentLoaded', 'resize']
 		sliderEvents.forEach((event) => {
 			window.addEventListener(
@@ -78,18 +91,7 @@ export default class Slider {
 		})
 	}
 
-	setData(data: IPhotos[]) {
-		const markup: string[] = this.createElement(data)
-		markup.forEach((markupEl) => {
-			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
-		})
-	}
-
-	clearData() {
-		this._sliderElements.innerHTML = ''
-	}
-
-	createElement(data: IPhotos[]): string[] {
+	private createElement(data: IPhotos[]): string[] {
 		return data.map(
 			(el) =>
 				`<div class="prefers__item" style="background-image: url('${el.url}');">
