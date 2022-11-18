@@ -1,4 +1,4 @@
-import IPhotos from '../models/photos'
+import IPhotos from '../models/@types/photos.interface'
 
 export const photosData: IPhotos[] = [
 	{

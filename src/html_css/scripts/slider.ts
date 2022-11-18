@@ -1,8 +1,8 @@
 import debounce from 'lodash.debounce'
 
-import IPhotos from '../models/photos'
+import IPhotos from '../models/@types/photos.interface'
 
-export class Slider {
+export default class Slider {
 	_slider: HTMLElement
 	_sliderElements: HTMLElement
 	_data: IPhotos[]
@@ -84,6 +84,7 @@ export class Slider {
 			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
 		})
 	}
+
 	clearData() {
 		this._sliderElements.innerHTML = ''
 	}
