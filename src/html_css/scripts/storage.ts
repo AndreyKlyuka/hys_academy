@@ -1,7 +1,10 @@
 import IPhotos from '../models/@types/photos.interface'
 import IStorage from '../models/storage.model'
 
-export default class Storage implements IStorage {
+import LocalStore from '../decorators/LocalStore.decorator'
+
+export class Storage implements IStorage {
+	@LocalStore
 	readonly data: IPhotos[]
 
 	constructor(data: IPhotos[]) {

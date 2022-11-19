@@ -1,4 +1,4 @@
-import Storage from '../scripts/storage'
+import { Storage } from '../scripts/storage'
 import Slider from '../scripts/slider'
 
 import IPhotos from './@types/photos.interface'
@@ -20,7 +20,7 @@ export default abstract class AbstractApp {
 				this._slider.setData(data)
 			})
 			.catch((error) => {
-				console.log('Error: ', error)
+				console.log('Error: ', error.message)
 			})
 	}
 	protected abstract initForm(): void

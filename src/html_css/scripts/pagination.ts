@@ -7,11 +7,11 @@ export function paginator(selector: string, data: IPhotos[]) {
 }
 
 function initPaginator(data: IPhotos[], selector: string) {
-	const paginator = document.querySelector(selector)
+	const paginator = <HTMLElement>document.querySelector(selector)
 
 	updateCards(data, selector, false)
 
-	paginator?.addEventListener('click', (event) => {
+	paginator.addEventListener('click', (event) => {
 		const target = <HTMLElement>event.target
 		if (target.tagName === 'BUTTON') {
 			updateCards(data, selector)?.call(target)

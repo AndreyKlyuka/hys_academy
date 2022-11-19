@@ -4,19 +4,21 @@ import debounce from 'lodash.debounce'
 
 import { paginator } from './pagination'
 import Slider from './slider'
-import Storage from './storage'
+import { Storage } from './storage'
 import Select from './select'
 
 import IPhotos from '../models/@types/photos.interface'
 
 import { photosData } from '../data/photos-data'
 import AbstractApp from '../models/app.model'
+import Readonly from '../decorators/Readonly.decorator'
 
 export default class App extends AbstractApp {
 	_slider!: Slider
 	_storage!: Storage
 	_storageData!: IPhotos[]
 
+	@Readonly(true)
 	init() {
 		this._storage = new Storage(photosData)
 		this._storageData = this._storage.getSliderData<IPhotos[]>()
