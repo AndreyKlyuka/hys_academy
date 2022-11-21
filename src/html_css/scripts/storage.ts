@@ -1,23 +1,26 @@
 import IPhotos from '../models/@types/photos.interface'
 import IStorage from '../models/storage.model'
 
-import LocalStore from '../decorators/LocalStore.decorator'
+import LocalStorage from '../decorators/LocalStorage.decorator'
+// import { photosData } from '../data/photos-data'
 
-export class Storage implements IStorage {
-	@LocalStore
-	readonly data: IPhotos[]
-
-	constructor(data: IPhotos[]) {
-		this.data = data
-		this.init()
-	}
+export default class Storage implements IStorage<IPhotos> {
+	@LocalStorage('sliderDate')
+	localData!: IPhotos[]
+	sliderData!: IPhotos[]
+	selectOptionCounter!: number
 
 	init() {
-		this.setSliderData()
+		this.sliderData = this.getSliderData()
+		this.selectOptionCounter = this.sliderData[0].albumId - 1
 	}
 
-	getSliderData<T>(): T {
-		return JSON.parse(<string>localStorage.getItem('sliderData'))
+	getSliderData() {
+		return this.localData
+	}
+
+	setSliderData(data: IPhotos[]) {
+		this.localData = data
 	}
 
 	getFormInput<T extends string>(item: T): T {
@@ -30,9 +33,5 @@ export class Storage implements IStorage {
 
 	clearFormInput<T extends string>(item: T) {
 		localStorage.removeItem(item)
-	}
-
-	private setSliderData() {
-		localStorage.setItem('sliderData', JSON.stringify(this.data))
 	}
 }

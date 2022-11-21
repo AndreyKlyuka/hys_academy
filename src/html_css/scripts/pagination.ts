@@ -2,7 +2,7 @@ import IPhotos from '../models/@types/photos.interface'
 
 const avatar = require('../images/courses/courses-avatar.png')
 
-export function paginator(selector: string, data: IPhotos[]) {
+export default function paginator(selector: string, data: IPhotos[]) {
 	initPaginator(data, selector)
 }
 

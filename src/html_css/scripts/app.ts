@@ -2,9 +2,9 @@ import $ from 'jquery'
 import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
-import { paginator } from './pagination'
+import paginator from './pagination'
 import Slider from './slider'
-import { Storage } from './storage'
+import Storage from './storage'
 import Select from './select'
 
 import IPhotos from '../models/@types/photos.interface'
@@ -16,20 +16,43 @@ import Readonly from '../decorators/Readonly.decorator'
 export default class App extends AbstractApp {
 	_slider!: Slider
 	_storage!: Storage
+	_select!: Select
+
 	_storageData!: IPhotos[]
 
 	@Readonly(true)
-	init() {
-		this._storage = new Storage(photosData)
-		this._storageData = this._storage.getSliderData<IPhotos[]>()
+	public init() {
+		this.initStorage()
+		this.initSlider()
+		this.initSelect()
+		this.initSlick()
+		this.initForm()
+		this.initPaginator()
+	}
 
+	protected initStorage() {
+		this._storage = new Storage()
+		this._storage.init()
+		this._storageData = this._storage.sliderData
+	}
+
+	protected initSlider() {
 		this._slider = new Slider('.prefers__slider', this._storageData)
+	}
 
-		new Select('.prefers__select', this.onAlbumChange.bind(this))
+	protected initSelect() {
+		this._select = new Select('.prefers__select', this.onAlbumChange.bind(this))
 
+		if (this._storage.sliderData) {
+			this._select._selector.selectedIndex = this._storage.selectOptionCounter
+		}
+	}
+
+	protected initPaginator() {
 		paginator('.blog__posts', this._storageData)
+	}
 
-		//slick slider init
+	protected initSlick() {
 		$(document).ready(function () {
 			$('.courses__cards-container').slick({
 				mobileFirst: true,
@@ -58,8 +81,6 @@ export default class App extends AbstractApp {
 				],
 			})
 		})
-
-		this.initForm()
 	}
 
 	protected initForm() {
