@@ -23,19 +23,21 @@ const updateCards = function (
 	selector: string,
 	isHandler = true
 ): Function | undefined {
-	const cardsContainer = <HTMLElement>document.querySelector(selector)
+	const cardsContainer = <HTMLElement>(
+		document.querySelector(selector)?.children[0]
+	)
+	const currentCards = <NodeListOf<HTMLElement>>(
+		document.querySelectorAll('.blog__post')
+	)
+	currentCards.forEach((card) => card.remove())
 
 	if (!isHandler) useMarkup(data, 1, cardsContainer)
 
 	return function (this: HTMLElement) {
-		const currentCards = <NodeListOf<HTMLElement>>(
-			document.querySelectorAll('.blog__post')
-		)
 		const activeButton = <HTMLElement>(
 			document.querySelector('.blog__posts-pagination-item_active')
 		)
 
-		currentCards.forEach((card) => card.remove())
 		activeButton?.classList.remove('blog__posts-pagination-item_active')
 		useMarkup(data, +this.innerHTML, cardsContainer)
 		this.classList.add('blog__posts-pagination-item_active')

@@ -248,7 +248,10 @@ body {
 	padding-bottom: 80px;
 	gap: 20px;
 }
-
+.courses__cards-container {
+	display: flex;
+	gap: 20px;
+}
 .courses__cards-container .slick-track {
 	display: flex;
 	gap: 20px;
@@ -269,6 +272,7 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	border-radius: 8px;
+	flex: 0 0 auto;
 }
 .slick-slide {
 	width: 260px;
@@ -350,6 +354,11 @@ body {
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 16px;
+}
+.courses__cards-container {
+	overflow: hidden;
+	max-width: 260px;
+	padding-top: 25px;
 }
 
 /* tour */
@@ -814,9 +823,15 @@ body {
 .blog__posts {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: 44px;
 	align-items: center;
 	padding-bottom: 80px;
+}
+.blog__posts-content {
+	display: flex;
+	flex-direction: column;
+	gap: 44px;
 }
 .blog__post {
 	background-color: var(--green-secondary);
@@ -1046,6 +1061,14 @@ body {
 		gap: 20px;
 		padding-bottom: 64px;
 	}
+	.courses__cards-container {
+		overflow: auto;
+		max-width: 560px;
+		padding-top: 25px;
+	}
+	.courses__card {
+		flex: 0 0 auto;
+	}
 	.courses__cards-container .slick-list {
 		max-width: 560px;
 	}
@@ -1093,7 +1116,6 @@ body {
 	}
 	.events__content {
 		display: flex;
-		/* justify-content: center; */
 	}
 	.events__title_uppercase {
 		font-size: 60px;
@@ -1154,7 +1176,6 @@ body {
 	}
 	.customer__content {
 		display: flex;
-		/* justify-content: space-between; */
 		gap: 178px;
 	}
 	.customer__background {
@@ -1214,8 +1235,12 @@ body {
 		max-width: 1024px;
 	}
 	.blog__posts {
+		justify-content: space-between;
 		flex-direction: row;
 		gap: 20px;
+	}
+	.blog__posts-content {
+		flex-direction: row;
 	}
 	.blog__post {
 		width: 415px;
@@ -1228,7 +1253,7 @@ body {
 		color: #5d74e4;
 		width: 40px;
 		height: 288px;
-		margin-left: 87px;
+		/* margin-left: 87px; */
 	}
 	.blog__form {
 		display: flex;
@@ -1273,8 +1298,8 @@ body {
 		width: 197px;
 		height: 197px;
 	}
-	.blog__post-pagination {
-		margin-left: 20px;
+	.blog__posts-content {
+		width: 700px;
 	}
 	.advantages__description {
 		width: 365px;
@@ -1293,7 +1318,7 @@ body {
 		width: 90%;
 	}
 	.blog__posts {
-		justify-content: space-around;
+		justify-content: space-between;
 		gap: 20px;
 	}
 	.header__container,
@@ -1331,15 +1356,22 @@ body {
 		height: 160px;
 	}
 	.post__image img {
-		width: 347px;
+		width: 335px;
 	}
 	.blog__posts {
-		justify-content: center;
+		justify-content: space-between;
 	}
 	.post__title {
 		width: 320px;
 	}
+	.blog__posts-content {
+		width: 850px;
+	}
+
 	.courses__cards-container .slick-list {
+		max-width: 850px;
+	}
+	.courses__cards-container {
 		max-width: 850px;
 	}
 }
