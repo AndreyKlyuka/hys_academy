@@ -4,11 +4,13 @@ import debounce from 'lodash.debounce'
 
 import { photosData } from '../data/photos-data'
 
-import paginator from './pagination'
 import Menu from './mobile-menu'
 import Slider from './slider'
 import Storage from './storage'
 import Select from './select'
+
+import paginator from './pagination'
+import addStickyHeader from './sticky-header'
 
 import IPhotos from '../models/@types/photos.interface'
 
@@ -48,14 +50,16 @@ export default class App extends AbstractApp {
 		this.initForm()
 
 		this.initPaginator()
+
+		this.initHeader()
+	}
+
+	protected initHeader(): void {
+		addStickyHeader()
 	}
 
 	protected initPaginator() {
 		paginator('.blog__posts', photosData)
-	}
-
-	protected initMenu() {
-		new Menu('menu', '.header__menu')
 	}
 
 	protected initSlick() {

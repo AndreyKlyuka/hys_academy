@@ -38,6 +38,8 @@ export default abstract class AbstractApp {
 	}
 
 	protected abstract initPaginator(): void
+	protected abstract initHeader(): void
+
 	protected abstract initSlick(): void
 	protected abstract initForm(): void
 
