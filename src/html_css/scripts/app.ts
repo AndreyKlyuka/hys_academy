@@ -3,13 +3,13 @@ import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
 import paginator from './pagination'
+import Menu from './mobile-menu'
 import Slider from './slider'
 import Storage from './storage'
 import Select from './select'
 
 import IPhotos from '../models/@types/photos.interface'
 
-import { photosData } from '../data/photos-data'
 import AbstractApp from '../models/app.model'
 import Readonly from '../decorators/Readonly.decorator'
 
@@ -28,6 +28,7 @@ export default class App extends AbstractApp {
 		this.initSlick()
 		this.initForm()
 		this.initPaginator()
+		this.initMenu()
 	}
 
 	protected initStorage() {
@@ -50,6 +51,10 @@ export default class App extends AbstractApp {
 
 	protected initPaginator() {
 		paginator('.blog__posts', this._storageData)
+	}
+
+	protected initMenu() {
+		new Menu('menu', '.header__menu')
 	}
 
 	protected initSlick() {

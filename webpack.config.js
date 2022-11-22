@@ -5,6 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+
 const mode = process.env.NODE_ENV || 'development'
 
 const devMode = mode === 'development'
@@ -40,8 +43,8 @@ module.exports = {
 				filename: 'bundle.css',
 			}
 
-		)
-	],
+		),
+	].concat(devMode ? [new BundleAnalyzerPlugin()] : []),
 	module: {
 		rules: [
 			{
@@ -74,7 +77,12 @@ module.exports = {
 			},
 			{
 				test: /\.tsx?$/i,
-				use: ['babel-loader', 'ts-loader'],
+				use: ['babel-loader', {
+					loader: 'ts-loader',
+					options: {
+						transpileOnly: true,
+					},
+				}],
 				exclude: /node_modules/,
 			},
 			{
@@ -85,7 +93,7 @@ module.exports = {
 	},
 	optimization: {
 		minimize: true,
-		minimizer: devMode ? undefined : [new CssMinimizerPlugin(), new TerserPlugin()],
+		minimizer: devMode ? undefined : [new CssMinimizerPlugin()],
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js']

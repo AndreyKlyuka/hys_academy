@@ -75,6 +75,36 @@ body {
 	line-height: 22px;
 	color: var(--black-secondary);
 }
+/* menu */
+.menu {
+	display: none;
+	background-color: #ffffff;
+	width: 100vw;
+	height: 85vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+.menu__container {
+	height: 64px;
+	align-items: center;
+}
+.menu__items {
+	padding: 24px 24px 0 24px;
+}
+.menu__item {
+	font-weight: 700;
+	font-size: 26px;
+	line-height: 36px;
+}
+.menu__item:not(:last-child) {
+	padding-bottom: 32px;
+	margin-bottom: 32px;
+	border-bottom: 1px solid #3d7fff20;
+}
+
 /* header */
 .header__container {
 	display: flex;

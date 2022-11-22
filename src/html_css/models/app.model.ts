@@ -31,6 +31,7 @@ export default abstract class AbstractApp {
 	protected abstract initStorage(): void
 	protected abstract initSelect(): void
 	protected abstract initPaginator(): void
+	protected abstract initMenu(): void
 	protected abstract initSlick(): void
 	protected abstract initForm(): void
 
