@@ -8,7 +8,6 @@ export default class Menu {
 	constructor(selector: string, burger: string) {
 		this.selector = <HTMLElement>document.getElementById(selector)
 		this.burger = <NodeListOf<HTMLElement>>document.querySelectorAll(burger)
-		this.init()
 	}
 
 	init() {

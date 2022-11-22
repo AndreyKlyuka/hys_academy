@@ -2,6 +2,8 @@ import $ from 'jquery'
 import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
+import { photosData } from '../data/photos-data'
+
 import paginator from './pagination'
 import Menu from './mobile-menu'
 import Slider from './slider'
@@ -14,43 +16,42 @@ import AbstractApp from '../models/app.model'
 import Readonly from '../decorators/Readonly.decorator'
 
 export default class App extends AbstractApp {
-	_slider!: Slider
-	_storage!: Storage
-	_select!: Select
-
 	_storageData!: IPhotos[]
+
+	constructor(
+		storage: Storage | undefined,
+		slider: Slider | undefined,
+		select: Select | undefined,
+		menu: Menu | undefined
+	) {
+		super(storage, slider, select, menu)
+	}
 
 	@Readonly(true)
 	public init() {
-		this.initStorage()
-		this.initSlider()
-		this.initSelect()
-		this.initSlick()
-		this.initForm()
-		this.initPaginator()
-		this.initMenu()
-	}
+		this._storage?.init()
 
-	protected initStorage() {
-		this._storage = new Storage()
-		this._storage.init()
-		this._storageData = this._storage.sliderData
-	}
+		this._slider?.initSlider(
+			this._storage !== undefined ? this._storage!.sliderData : photosData
+		)
 
-	protected initSlider() {
-		this._slider = new Slider('.prefers__slider', this._storageData)
-	}
+		this._select?.init(this.onAlbumChange.bind(this))
 
-	protected initSelect() {
-		this._select = new Select('.prefers__select', this.onAlbumChange.bind(this))
-
-		if (this._storage.sliderData) {
-			this._select._selector.selectedIndex = this._storage.selectOptionCounter
+		if (this._storage?.sliderData && this._select) {
+			this._select!._selector.selectedIndex = this._storage.selectOptionCounter
 		}
+
+		this._menu?.init()
+
+		this.initSlick()
+
+		this.initForm()
+
+		this.initPaginator()
 	}
 
 	protected initPaginator() {
-		paginator('.blog__posts', this._storageData)
+		paginator('.blog__posts', photosData)
 	}
 
 	protected initMenu() {
@@ -89,31 +90,37 @@ export default class App extends AbstractApp {
 	}
 
 	protected initForm() {
-		const form = <HTMLFormElement>document.getElementById('form')
-		const nameInput = <HTMLInputElement>form.querySelector('.blog__form-name')
-		const phoneInput = <HTMLInputElement>form.querySelector('.blog__form-phone')
-		const emailInput = <HTMLInputElement>form.querySelector('.blog__form-email')
+		if (this._storage) {
+			const form = <HTMLFormElement>document.getElementById('form')
+			const nameInput = <HTMLInputElement>form.querySelector('.blog__form-name')
+			const phoneInput = <HTMLInputElement>(
+				form.querySelector('.blog__form-phone')
+			)
+			const emailInput = <HTMLInputElement>(
+				form.querySelector('.blog__form-email')
+			)
 
-		this.addListenerToInput(
-			[nameInput, phoneInput, emailInput],
-			['formName', 'formPhone', 'formEmail']
-		)
+			this.addListenerToInput(
+				[nameInput, phoneInput, emailInput],
+				['formName', 'formPhone', 'formEmail']
+			)
 
-		nameInput.value = this._storage.getFormInput<string>('formName')
-		phoneInput.value = this._storage.getFormInput<string>('formPhone')
-		emailInput.value = this._storage.getFormInput<string>('formEmail')
+			nameInput.value = this._storage!.getFormInput<string>('formName')
+			phoneInput.value = this._storage!.getFormInput<string>('formPhone')
+			emailInput.value = this._storage!.getFormInput<string>('formEmail')
 
-		form.addEventListener('submit', (event) => {
-			event.preventDefault()
+			form.addEventListener('submit', (event) => {
+				event.preventDefault()
 
-			this._storage.clearFormInput<string>('formName')
-			this._storage.clearFormInput<string>('formPhone')
-			this._storage.clearFormInput<string>('formEmail')
+				this._storage!.clearFormInput<string>('formName')
+				this._storage!.clearFormInput<string>('formPhone')
+				this._storage!.clearFormInput<string>('formEmail')
 
-			nameInput.value = ''
-			phoneInput.value = ''
-			emailInput.value = ''
-		})
+				nameInput.value = ''
+				phoneInput.value = ''
+				emailInput.value = ''
+			})
+		} else console.error('Storage class is disabled')
 	}
 
 	protected addListenerToInput(
@@ -124,7 +131,7 @@ export default class App extends AbstractApp {
 			inputElements.addEventListener(
 				'input',
 				debounce((event) => {
-					this._storage.setFormInput<string>(value[index], event.target.value)
+					this._storage!.setFormInput<string>(value[index], event.target.value)
 				}, 750)
 			)
 		})
