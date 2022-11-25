@@ -1,13 +1,12 @@
+import debounce from 'lodash.debounce'
+
 import Storage from '../scripts/storage'
 import Slider from '../scripts/slider'
 import Select from '../scripts/select'
 
-import IPhotos from './@types/photos.interface'
 import Menu from '../scripts/mobile-menu'
 
 export default abstract class AbstractApp {
-	abstract _storageData: IPhotos[]
-
 	private _baseUrl: string = 'https://jsonplaceholder.typicode.com/albums/'
 
 	constructor(
@@ -37,14 +36,23 @@ export default abstract class AbstractApp {
 			})
 	}
 
+	protected addListenerToInput(
+		inputElements: HTMLInputElement[],
+		value: string[]
+	) {
+		inputElements.forEach((inputElements, index) => {
+			inputElements.addEventListener(
+				'input',
+				debounce((event) => {
+					this._storage?.setFormInput<string>(value[index], event.target.value)
+				}, 750)
+			)
+		})
+	}
+
 	protected abstract initPaginator(): void
 	protected abstract initHeader(): void
 
 	protected abstract initSlick(): void
 	protected abstract initForm(): void
-
-	protected abstract addListenerToInput(
-		inputElements: HTMLInputElement[],
-		value: string[]
-	): void
 }

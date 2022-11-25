@@ -7,7 +7,6 @@ export default function LocalStorage(storageKey: string) {
 		const getter = () => {
 			if (!localStorage.getItem(storageKey)) {
 				setter(photosData)
-				return JSON.parse(<string>localStorage.getItem(storageKey))
 			}
 			return JSON.parse(<string>localStorage.getItem(storageKey))
 		}

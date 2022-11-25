@@ -2,7 +2,6 @@ import IPhotos from '../models/@types/photos.interface'
 import IStorage from '../models/storage.model'
 
 import LocalStorage from '../decorators/LocalStorage.decorator'
-// import { photosData } from '../data/photos-data'
 
 export default class Storage implements IStorage<IPhotos> {
 	@LocalStorage('sliderDate')

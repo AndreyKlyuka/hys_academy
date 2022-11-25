@@ -2,7 +2,6 @@ import $ from 'jquery'
 import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
-import IPhotos from '../models/@types/photos.interface'
 import AbstractApp from '../models/app.model'
 
 import { photosData } from '../data/photos-data'
@@ -24,8 +23,6 @@ interface AppProps {
 	menu?: Menu
 }
 export default class App extends AbstractApp {
-	_storageData!: IPhotos[]
-
 	constructor(props: AppProps) {
 		super(props.storage, props.slider, props.select, props.menu)
 	}
@@ -126,19 +123,5 @@ export default class App extends AbstractApp {
 				emailInput.value = ''
 			})
 		} else console.error('Storage class is disabled')
-	}
-
-	protected addListenerToInput(
-		inputElements: HTMLInputElement[],
-		value: string[]
-	) {
-		inputElements.forEach((inputElements, index) => {
-			inputElements.addEventListener(
-				'input',
-				debounce((event) => {
-					this._storage?.setFormInput<string>(value[index], event.target.value)
-				}, 750)
-			)
-		})
 	}
 }

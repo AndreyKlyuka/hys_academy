@@ -18,13 +18,12 @@ export default class Slider implements ISlider {
 		this.cardsCount = 3
 		this.cardWidth = 197
 		this.slidesCounter = 0
-
-		// this.initSlider()
 	}
 
 	initSlider(data: IPhotos[]) {
 		this._data = data
 		this.checkSliderEvents()
+		this.clearData()
 		this.setData(this._data)
 		this.initButtons()
 	}

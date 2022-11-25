@@ -1,5 +1,3 @@
-import Menu from './mobile-menu'
-
 export default function addStickyHeader(): void {
 	window.addEventListener('scroll', () => {
 		const header: HTMLElement = <HTMLElement>document.querySelector('.header')
