@@ -9,10 +9,10 @@ import Select from './scripts/select'
 import Menu from './scripts/mobile-menu'
 
 const storage = new Storage()
-const slider = new Slider('.prefers__slider') // storage.sliderData)
+const slider = new Slider('.prefers__slider')
 const select = new Select('.prefers__select')
 const menu = new Menu('menu', '.header__menu')
 
-const app = new App(storage, slider, select, menu)
+const app = new App({ storage, slider, select, menu })
 
 app.init()

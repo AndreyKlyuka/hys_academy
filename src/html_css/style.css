@@ -18,6 +18,7 @@
 /* common */
 body {
 	font-family: 'Montserrat', sans-serif;
+	scroll-behavior: smooth;
 }
 .btn {
 	padding: 0;
@@ -80,7 +81,7 @@ body {
 	display: none;
 	background-color: #ffffff;
 	width: 100vw;
-	height: 85vh;
+	height: 100vh;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -99,6 +100,10 @@ body {
 	font-size: 26px;
 	line-height: 36px;
 }
+.menu__item a {
+	text-decoration: none;
+	color: inherit;
+}
 .menu__item:not(:last-child) {
 	padding-bottom: 32px;
 	margin-bottom: 32px;
@@ -110,6 +115,7 @@ body {
 	max-width: 100vw;
 	background: #64be9790;
 	position: sticky;
+	z-index: 2;
 	top: 0px;
 	width: 100%;
 	z-index: 100;
@@ -119,7 +125,7 @@ body {
 .header__container {
 	display: flex;
 	justify-content: space-between;
-	padding: 24px;
+	padding: 12px;
 }
 .header__menu {
 	display: flex;
@@ -151,6 +157,7 @@ body {
 	transform: translateY(6px);
 }
 .header__action {
+	z-index: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -196,8 +203,7 @@ body {
 }
 .education__image {
 	position: relative;
-	width: 375px;
-	height: 377px;
+	width: 100%;
 	left: -24px;
 	top: -15px;
 }
@@ -536,7 +542,7 @@ body {
 	color: #fe5f60;
 }
 .events__selected-card {
-	width: 328px;
+	max-width: 328px;
 	height: 380px;
 	background-image: url('./images/courses/course-design.png');
 	background-position: center;
@@ -1040,7 +1046,7 @@ body {
 	}
 	.header__container {
 		padding: 0;
-		margin: 32px auto;
+		margin: 12px auto;
 		max-width: 1024px;
 	}
 	.header__burger {

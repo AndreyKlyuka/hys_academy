@@ -2,6 +2,9 @@ import $ from 'jquery'
 import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
+import IPhotos from '../models/@types/photos.interface'
+import AbstractApp from '../models/app.model'
+
 import { photosData } from '../data/photos-data'
 
 import Menu from './mobile-menu'
@@ -12,21 +15,19 @@ import Select from './select'
 import paginator from './pagination'
 import addStickyHeader from './sticky-header'
 
-import IPhotos from '../models/@types/photos.interface'
-
-import AbstractApp from '../models/app.model'
 import Readonly from '../decorators/Readonly.decorator'
 
+interface AppProps {
+	storage?: Storage
+	select?: Select
+	slider?: Slider
+	menu?: Menu
+}
 export default class App extends AbstractApp {
 	_storageData!: IPhotos[]
 
-	constructor(
-		storage: Storage | undefined,
-		slider: Slider | undefined,
-		select: Select | undefined,
-		menu: Menu | undefined
-	) {
-		super(storage, slider, select, menu)
+	constructor(props: AppProps) {
+		super(props.storage, props.slider, props.select, props.menu)
 	}
 
 	@Readonly(true)
@@ -54,12 +55,12 @@ export default class App extends AbstractApp {
 		this.initHeader()
 	}
 
-	protected initHeader(): void {
-		addStickyHeader()
-	}
-
 	protected initPaginator() {
 		paginator('.blog__posts', photosData)
+	}
+
+	protected initHeader(): void {
+		addStickyHeader()
 	}
 
 	protected initSlick() {
@@ -135,7 +136,7 @@ export default class App extends AbstractApp {
 			inputElements.addEventListener(
 				'input',
 				debounce((event) => {
-					this._storage!.setFormInput<string>(value[index], event.target.value)
+					this._storage?.setFormInput<string>(value[index], event.target.value)
 				}, 750)
 			)
 		})

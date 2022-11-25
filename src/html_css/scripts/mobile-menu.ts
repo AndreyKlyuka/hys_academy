@@ -1,5 +1,10 @@
 import debounce from 'lodash.debounce'
 
+enum DisplayState {
+	'BLOCK' = 'block',
+	'NONE' = 'none',
+}
+
 export default class Menu {
 	openState: boolean = false
 	selector: HTMLElement
@@ -22,12 +27,15 @@ export default class Menu {
 		this.burger.forEach((el) => {
 			el.addEventListener('click', this.toggleMenu.bind(this))
 		})
+		this.selector.addEventListener('click', (event: Event) => {
+			if ((<HTMLElement>event.target).closest('a')) this.closeMenu()
+		})
 	}
 	openMenu() {
-		this.selector.style.display = 'block'
+		this.selector.style.display = DisplayState['BLOCK']
 	}
 	closeMenu() {
-		this.selector.style.display = 'none'
+		this.selector.style.display = DisplayState['NONE']
 	}
 
 	toggleMenu() {
@@ -40,9 +48,8 @@ export default class Menu {
 		window.addEventListener(
 			'resize',
 			debounce(function (this: Menu) {
-				if (window.innerWidth >= 768) {
-					this.setOpenState(false)
-					this.closeMenu()
+				if (window.innerWidth >= 768 && this.openState) {
+					this.toggleMenu()
 				}
 			}, 200).bind(this)
 		)
