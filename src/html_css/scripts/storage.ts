@@ -1,31 +1,35 @@
-import IPhotos from '../models/photos'
+import IPhotos from '../models/@types/photos.interface'
+import IStorage from '../models/storage.model'
 
-export class Storage {
-	data: IPhotos[]
+export default class Storage implements IStorage {
+	readonly data: IPhotos[]
+
 	constructor(data: IPhotos[]) {
 		this.data = data
 		this.init()
 	}
+
 	init() {
 		this.setSliderData()
 	}
 
-	setSliderData() {
-		localStorage.setItem('sliderData', JSON.stringify(this.data))
-	}
-	getSliderData(): IPhotos[] {
+	getSliderData<T>(): T {
 		return JSON.parse(<string>localStorage.getItem('sliderData'))
 	}
 
-	getFormInput(item: string): string {
-		return <string>localStorage.getItem(item)
+	getFormInput<T extends string>(item: T): T {
+		return <T>localStorage.getItem(item)
 	}
 
-	setFormInput(item: string, value: string) {
+	setFormInput<T extends string>(item: T, value: T) {
 		localStorage.setItem(item, value)
 	}
 
-	clearFormInput(item: string) {
+	clearFormInput<T extends string>(item: T) {
 		localStorage.removeItem(item)
+	}
+
+	private setSliderData() {
+		localStorage.setItem('sliderData', JSON.stringify(this.data))
 	}
 }

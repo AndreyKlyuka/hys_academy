@@ -3,36 +3,29 @@ import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
 import { paginator } from './pagination'
-import { Slider } from './slider'
-import { Storage } from './storage'
-import { Select } from './select'
+import Slider from './slider'
+import Storage from './storage'
+import Select from './select'
 
-import IPhotos from '../models/photos'
+import IPhotos from '../models/@types/photos.interface'
 
 import { photosData } from '../data/photos-data'
+import AbstractApp from '../models/app.model'
 
-export class App {
-	_slider: Slider
-	_storage: Storage
-	_storageData: IPhotos[]
+export default class App extends AbstractApp {
+	_slider!: Slider
+	_storage!: Storage
+	_storageData!: IPhotos[]
 
-	constructor() {
+	init() {
 		this._storage = new Storage(photosData)
-		this._storageData = this._storage.getSliderData()
+		this._storageData = this._storage.getSliderData<IPhotos[]>()
 
 		this._slider = new Slider('.prefers__slider', this._storageData)
-	}
-	init() {
-		//select init
+
 		new Select('.prefers__select', this.onAlbumChange.bind(this))
 
-		// storage init
-		// this._storage = new Storage(photosData)
-		// const storageData = this._storage.getSliderData()
-
-		// pagination and slider init
 		paginator('.blog__posts', this._storageData)
-		// this._slider = new Slider('.prefers__slider', storageData)
 
 		//slick slider init
 		$(document).ready(function () {
@@ -64,7 +57,10 @@ export class App {
 			})
 		})
 
-		// save form value in storage
+		this.initForm()
+	}
+
+	protected initForm() {
 		const form = <HTMLFormElement>document.getElementById('form')
 		const nameInput = <HTMLInputElement>form.querySelector('.blog__form-name')
 		const phoneInput = <HTMLInputElement>form.querySelector('.blog__form-phone')
@@ -75,16 +71,16 @@ export class App {
 			['formName', 'formPhone', 'formEmail']
 		)
 
-		nameInput.value = this._storage.getFormInput('formName')
-		phoneInput.value = this._storage.getFormInput('formPhone')
-		emailInput.value = this._storage.getFormInput('formEmail')
+		nameInput.value = this._storage.getFormInput<string>('formName')
+		phoneInput.value = this._storage.getFormInput<string>('formPhone')
+		emailInput.value = this._storage.getFormInput<string>('formEmail')
 
 		form.addEventListener('submit', (event) => {
 			event.preventDefault()
 
-			this._storage.clearFormInput('formName')
-			this._storage.clearFormInput('formPhone')
-			this._storage.clearFormInput('formEmail')
+			this._storage.clearFormInput<string>('formName')
+			this._storage.clearFormInput<string>('formPhone')
+			this._storage.clearFormInput<string>('formEmail')
 
 			nameInput.value = ''
 			phoneInput.value = ''
@@ -92,26 +88,15 @@ export class App {
 		})
 	}
 
-	onAlbumChange(albumId: number) {
-		fetch(
-			`https://jsonplaceholder.typicode.com/albums/${albumId}/photos?_start=0&_limit=5`
-		)
-			.then((response) => response.json())
-			.then((data) => {
-				this._slider.clearData()
-				this._slider.setData(data)
-			})
-			.catch((error) => {
-				console.log('Error: ', error)
-			})
-	}
-
-	addListenerToInput(inputElements: HTMLInputElement[], value: string[]) {
+	protected addListenerToInput(
+		inputElements: HTMLInputElement[],
+		value: string[]
+	) {
 		inputElements.forEach((inputElements, index) => {
 			inputElements.addEventListener(
 				'input',
 				debounce((event) => {
-					this._storage.setFormInput(value[index], event.target.value)
+					this._storage.setFormInput<string>(value[index], event.target.value)
 				}, 750)
 			)
 		})
