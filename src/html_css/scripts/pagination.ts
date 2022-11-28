@@ -1,44 +1,52 @@
-import coursesAvatar from '../images/courses/courses-avatar.png'
+const avatar = require('../images/courses/courses-avatar.png')
+import IPhotos from '../models/photos'
 
-export function paginator(selector, data) {
+export function paginator(selector: string, data: IPhotos[]) {
 	initPaginator(data, selector)
 }
 
-
-function initPaginator(data, selector) {
+function initPaginator(data: IPhotos[], selector: string) {
 	const paginator = document.querySelector(selector)
 
 	updateCards(data, selector, false)
 
-	paginator.addEventListener('click', (event) => {
-		const target = event.target
+	paginator?.addEventListener('click', (event) => {
+		const target = <HTMLElement>event.target
 		if (target.tagName === 'BUTTON') {
-			updateCards(data, selector).call(target)
+			updateCards(data, selector)?.call(target)
 		}
-
 	})
 }
-const updateCards = function (data, selector, isHandler = true) {
-	const cardsContainer = document.querySelector(selector)
+const updateCards = function (
+	data: IPhotos[],
+	selector: string,
+	isHandler = true
+): Function | undefined {
+	const cardsContainer = <HTMLElement>document.querySelector(selector)
 
 	if (!isHandler) useMarkup(data, 1, cardsContainer)
 
-	return function () {
-		const currentCards = document.querySelectorAll('.blog__post')
-		const activeButton = document.querySelector(
-			'.blog__posts-pagination-item_active'
+	return function (this: HTMLElement) {
+		const currentCards = <NodeListOf<HTMLElement>>(
+			document.querySelectorAll('.blog__post')
+		)
+		const activeButton = <HTMLElement>(
+			document.querySelector('.blog__posts-pagination-item_active')
 		)
 
 		currentCards.forEach((card) => card.remove())
-		activeButton.classList.remove('blog__posts-pagination-item_active')
-		useMarkup(data, this.innerHTML, cardsContainer)
+		activeButton?.classList.remove('blog__posts-pagination-item_active')
+		useMarkup(data, +this.innerHTML, cardsContainer)
 		this.classList.add('blog__posts-pagination-item_active')
-
 	}
 }
 
-function useMarkup(data, paginationBtn, container) {
-	const markup = createMarkup(
+function useMarkup(
+	data: IPhotos[],
+	paginationBtn: number,
+	container: HTMLElement
+) {
+	const markup: string[] = createMarkup(
 		data.slice(paginationBtn * 2 - 2, 2 * paginationBtn)
 	)
 	markup.forEach((markupEl) =>
@@ -46,14 +54,14 @@ function useMarkup(data, paginationBtn, container) {
 	)
 }
 
-function createMarkup(data) {
+function createMarkup(data: IPhotos[]): string[] {
 	return data.map(
 		(el) => `<div class="blog__post">
                     <div class="blog__post-left">
                         <h4 class="post__about">DESIGN</h4>
                         <div class="blog__avatar">
                             <img
-                                src=${coursesAvatar}
+                                src=${avatar}
                                 alt="teacher avatar"
                             />
                         </div>

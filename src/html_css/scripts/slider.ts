@@ -1,14 +1,19 @@
-import { debounce } from './tools/debounce.js'
+import debounce from 'lodash.debounce'
+
+import IPhotos from '../models/photos'
 
 export class Slider {
-	#slider = null
-	#sliderElements = null
-	#data = null
+	_slider: HTMLElement
+	_sliderElements: HTMLElement
+	_data: IPhotos[]
+	cardsCount: number
+	cardWidth: number
+	slidesCounter: number
 
-	constructor(selector, data) {
-		this.#slider = document.querySelector(selector)
-		this.#data = data
-		this.#sliderElements = this.#slider.children[1]
+	constructor(selector: string, data: IPhotos[]) {
+		this._slider = <HTMLElement>document.querySelector(selector)
+		this._data = data
+		this._sliderElements = <HTMLElement>this._slider.children[1]
 
 		this.cardsCount = 3
 		this.cardWidth = 197
@@ -16,28 +21,30 @@ export class Slider {
 
 		this.initSlider()
 	}
+
 	initSlider() {
 		this.checkSliderEvents()
-		this.setData(this.#data)
+		this.setData(this._data)
 		this.initButtons()
 	}
+
 	initButtons() {
-		this.#slider.addEventListener('click', (event) => {
-			const target = event.target.closest('button')
+		this._slider.addEventListener('click', (event) => {
+			const target = (<HTMLElement>event.target).closest('button')
 
 			if (!target) return null
 
-			this.checkSliderCounter(this.#sliderElements)
+			this.checkSliderCounter(this._sliderElements)
 
 			target.classList.contains('prefers__slide_right')
 				? this.slidesCounter++
 				: this.slidesCounter--
 
-			this.scrollElement(this.#sliderElements)
+			this.scrollElement(this._sliderElements)
 		})
 	}
 
-	scrollElement(selector) {
+	scrollElement(selector: HTMLElement) {
 		selector.scrollTo({
 			top: 0,
 			left: (this.cardWidth + 20) * this.slidesCounter,
@@ -45,18 +52,18 @@ export class Slider {
 		})
 	}
 
-	checkSliderCounter(selector) {
+	checkSliderCounter(selector: HTMLElement) {
 		if (Math.floor(selector.scrollLeft / this.cardWidth) !== this.slidesCounter)
 			this.slidesCounter = Math.floor(selector.scrollLeft / this.cardWidth)
 	}
 
-	checkSliderEvents() {
-		const sliderEvents = ['DOMContentLoaded', 'resize']
+	checkSliderEvents(this: Slider) {
+		const sliderEvents: string[] = ['DOMContentLoaded', 'resize']
 		sliderEvents.forEach((event) => {
 			window.addEventListener(
 				event,
 				debounce(
-					function () {
+					function (this: Slider) {
 						if (window.innerWidth <= 767) {
 							this.cardWidth = 207
 							this.cardsCount = 1
@@ -71,17 +78,17 @@ export class Slider {
 		})
 	}
 
-	setData(data) {
-		const markup = this.createElement(data)
+	setData(data: IPhotos[]) {
+		const markup: string[] = this.createElement(data)
 		markup.forEach((markupEl) => {
-			this.#sliderElements.insertAdjacentHTML('afterbegin', markupEl)
+			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
 		})
 	}
 	clearData() {
-		this.#sliderElements.innerHTML = null
+		this._sliderElements.innerHTML = ''
 	}
 
-	createElement(data) {
+	createElement(data: IPhotos[]): string[] {
 		return data.map(
 			(el) =>
 				`<div class="prefers__item" style="background-image: url('${el.url}');">

@@ -1,4 +1,6 @@
-export const photosData = [
+import IPhotos from '../models/photos'
+
+export const photosData: IPhotos[] = [
 	{
 		albumId: 1,
 		id: 1,
