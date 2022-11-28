@@ -1,3 +1,5 @@
+@import url(reset.css);
+
 :root {
 	--blue-primary: #1b63f0;
 	--blue-secondary: #bad1ff;
@@ -490,7 +492,7 @@ body {
 	border-radius: 8px;
 	display: flex;
 	flex-direction: column;
-	justify-content: end;
+	justify-content: flex-end;
 	align-items: center;
 }
 .events__selected-description {

@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="reset.css" />
-		<link rel="stylesheet" href="style.css" />
+		<!-- <link rel="stylesheet" href="reset.css" /> -->
+		<!-- <link rel="stylesheet" href="style.css" /> -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -201,7 +201,7 @@
 									<div class="courses__card courses__card_design">
 										<div class="courses__card-avatar">
 											<img
-												src="./images/courses/courses-avatar1.png"
+												src="./images/courses/courses-avatar.png"
 												alt="teacher avatar"
 											/>
 										</div>
@@ -257,7 +257,7 @@
 									<div class="courses__card courses__card_marketing">
 										<div class="courses__card-avatar">
 											<img
-												src="./images/courses/courses-avatar1.png"
+												src="./images/courses/courses-avatar.png"
 												alt="teacher avatar"
 											/>
 										</div>
@@ -313,7 +313,7 @@
 									<div class="courses__card courses__card_web-design">
 										<div class="courses__card-avatar">
 											<img
-												src="./images/courses/courses-avatar1.png"
+												src="./images/courses/courses-avatar.png"
 												alt="teacher avatar"
 											/>
 										</div>
@@ -649,7 +649,7 @@
 								veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 							</p>
 							<div class="prefers__slider-select">
-								<select class="prefers__select" name="" id="">
+								<select class="prefers__select">
 									<option class="prefers__select-option">1</option>
 									<option class="prefers__select-option">2</option>
 									<option class="prefers__select-option">3</option>
@@ -823,13 +823,17 @@
 							</h2>
 							<div class="blog__posts">
 								<div class="blog__post-pagination">
-									<div
-										class="blog__posts-pagination-item blog__posts-pagination-item_active"
+									<button
+										class="btn-reset blog__posts-pagination-item blog__posts-pagination-item_active"
 									>
 										1
-									</div>
-									<div class="blog__posts-pagination-item">2</div>
-									<div class="blog__posts-pagination-item">3</div>
+									</button>
+									<button class="btn-reset blog__posts-pagination-item">
+										2
+									</button>
+									<button class="btn-reset blog__posts-pagination-item">
+										3
+									</button>
 								</div>
 							</div>
 							<div class="blog__form form">
@@ -844,6 +848,7 @@
 											class="blog__form-phone"
 											type="tel"
 											placeholder="Phone"
+											pattern="[0-9]{10}"
 										/>
 										<input
 											class="blog__form-email"
@@ -967,5 +972,5 @@
 		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
 		crossorigin="anonymous"
 	></script> -->
-	<script src="index.js" type="module"></script>
+	<!-- <script src="index.js" type="module"></script> -->
 </html>

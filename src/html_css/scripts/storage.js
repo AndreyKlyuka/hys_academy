@@ -8,40 +8,52 @@ export class Storage {
 	}
 
 	setSliderData() {
-		window.localStorage.setItem('sliderData', JSON.stringify(this.data))
+		localStorage.setItem('sliderData', JSON.stringify(this.data))
 	}
 	getSliderData() {
-		const sliderData = window.localStorage.getItem('sliderData')
-		return JSON.parse(sliderData)
+		return JSON.parse(localStorage.getItem('sliderData'))
 	}
 
-	getFormName() {
-		return window.localStorage.getItem('formName')
-	}
-	getFormPhone() {
-		return window.localStorage.getItem('formPhone')
-	}
-	getFormEmail() {
-		return window.localStorage.getItem('formEmail')
+	// getFormName() {
+	// 	return localStorage.getItem('formName')
+	// }
+	// getFormPhone() {
+	// 	return localStorage.getItem('formPhone')
+	// }
+	// getFormEmail() {
+	// 	return localStorage.getItem('formEmail')
+	// }
+
+	getFormInput(input) {
+		return localStorage.getItem(input)
+
 	}
 
-	setFormName(value) {
-		window.localStorage.setItem('formName', value)
-	}
-	setFormPhone(value) {
-		window.localStorage.setItem('formPhone', value)
-	}
-	setFormEmail(value) {
-		window.localStorage.setItem('formEmail', value)
+	// setFormName(value) {
+	// 	localStorage.setItem('formName', value)
+	// }
+	// setFormPhone(value) {
+	// 	localStorage.setItem('formPhone', value)
+	// }
+	// setFormEmail(value) {
+	// 	localStorage.setItem('formEmail', value)
+	// }
+
+	setFormInput(input, value) {
+		localStorage.setItem(input, value)
 	}
 
-	clearFormName() {
-		window.localStorage.removeItem('formName')
-	}
-	clearFormPhone() {
-		window.localStorage.removeItem('formPhone')
-	}
-	clearFormEmail() {
-		window.localStorage.removeItem('formEmail')
+	// clearFormName() {
+	// 	localStorage.removeItem('formName')
+	// }
+	// clearFormPhone() {
+	// 	localStorage.removeItem('formPhone')
+	// }
+	// clearFormEmail() {
+	// 	localStorage.removeItem('formEmail')
+	// }
+
+	clearFormInput(input) {
+		localStorage.removeItem(input)
 	}
 }

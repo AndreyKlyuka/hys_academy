@@ -1,32 +1,39 @@
+import coursesAvatar from '../images/courses/courses-avatar.png'
+
 export function paginator(selector, data) {
 	initPaginator(data, selector)
 }
 
+
 function initPaginator(data, selector) {
+	const paginator = document.querySelector(selector)
+
 	updateCards(data, selector, false)
-	const paginationBtns = document.querySelectorAll(
-		'.blog__posts-pagination-item'
-	)
-	paginationBtns.forEach((btn) => {
-		btn.addEventListener('click', updateCards(data, selector))
+
+	paginator.addEventListener('click', (event) => {
+		const target = event.target
+		if (target.tagName === 'BUTTON') {
+			updateCards(data, selector).call(target)
+		}
+
 	})
 }
 const updateCards = function (data, selector, isHandler = true) {
 	const cardsContainer = document.querySelector(selector)
-	if (isHandler === false) {
-		useMarkup(data, 1, cardsContainer)
-	}
+
+	if (!isHandler) useMarkup(data, 1, cardsContainer)
+
 	return function () {
 		const currentCards = document.querySelectorAll('.blog__post')
 		const activeButton = document.querySelector(
 			'.blog__posts-pagination-item_active'
 		)
-		currentCards.forEach((card) => {
-			card.remove()
-		})
+
+		currentCards.forEach((card) => card.remove())
 		activeButton.classList.remove('blog__posts-pagination-item_active')
-		useMarkup(data, +this.innerHTML, cardsContainer)
+		useMarkup(data, this.innerHTML, cardsContainer)
 		this.classList.add('blog__posts-pagination-item_active')
+
 	}
 }
 
@@ -46,7 +53,7 @@ function createMarkup(data) {
                         <h4 class="post__about">DESIGN</h4>
                         <div class="blog__avatar">
                             <img
-                                src="./images/courses/courses-avatar1.png"
+                                src=${coursesAvatar}
                                 alt="teacher avatar"
                             />
                         </div>

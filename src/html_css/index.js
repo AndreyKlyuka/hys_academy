@@ -1,6 +1,5 @@
-import 'https://code.jquery.com/jquery-3.6.1.min.js'
-// import * as $ from 'jquery'
-import './scripts/tools/slick.min.js'
+import './index.html'
+import './style.css'
 
 import { App } from './scripts/app.js'
 
