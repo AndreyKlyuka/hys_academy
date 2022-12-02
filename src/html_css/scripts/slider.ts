@@ -28,7 +28,17 @@ export default class Slider implements ISlider {
 		this.initButtons()
 	}
 
-	initButtons() {
+	setData(data: IPhotos[]) {
+		const markup: string[] = this.createElement(data)
+		markup.forEach((markupEl) => {
+			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
+		})
+	}
+
+	clearData() {
+		this._sliderElements.innerHTML = ''
+	}
+	private initButtons() {
 		this._slider.addEventListener('click', (event) => {
 			const target = (<HTMLElement>event.target).closest('button')
 
@@ -52,12 +62,12 @@ export default class Slider implements ISlider {
 		})
 	}
 
-	checkSliderCounter(selector: HTMLElement) {
+	private checkSliderCounter(selector: HTMLElement) {
 		if (Math.floor(selector.scrollLeft / this.cardWidth) !== this.slidesCounter)
 			this.slidesCounter = Math.floor(selector.scrollLeft / this.cardWidth)
 	}
 
-	checkSliderEvents(this: Slider) {
+	private checkSliderEvents(this: Slider) {
 		const sliderEvents: string[] = ['DOMContentLoaded', 'resize']
 		sliderEvents.forEach((event) => {
 			window.addEventListener(
@@ -78,18 +88,7 @@ export default class Slider implements ISlider {
 		})
 	}
 
-	setData(data: IPhotos[]) {
-		const markup: string[] = this.createElement(data)
-		markup.forEach((markupEl) => {
-			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
-		})
-	}
-
-	clearData() {
-		this._sliderElements.innerHTML = ''
-	}
-
-	createElement(data: IPhotos[]): string[] {
+	private createElement(data: IPhotos[]): string[] {
 		return data.map(
 			(el) =>
 				`<div class="prefers__item" style="background-image: url('${el.url}');">

@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import 'slick-carousel'
-import debounce from 'lodash.debounce'
 
 import AbstractApp from '../models/app.model'
 
@@ -10,7 +9,6 @@ import Menu from './mobile-menu'
 import Slider from './slider'
 import Storage from './storage'
 import Select from './select'
-
 import paginator from './pagination'
 import addStickyHeader from './sticky-header'
 
@@ -52,7 +50,7 @@ export default class App extends AbstractApp {
 		this.initHeader()
 	}
 
-	protected initPaginator() {
+	protected initPaginator(): void {
 		paginator('.blog__posts', photosData)
 	}
 
@@ -60,7 +58,7 @@ export default class App extends AbstractApp {
 		addStickyHeader()
 	}
 
-	protected initSlick() {
+	protected initSlick(): void {
 		$(document).ready(function () {
 			$('.courses__cards-container').slick({
 				mobileFirst: true,
@@ -91,7 +89,7 @@ export default class App extends AbstractApp {
 		})
 	}
 
-	protected initForm() {
+	protected initForm(): void {
 		if (this._storage) {
 			const form = <HTMLFormElement>document.getElementById('form')
 			const nameInput = <HTMLInputElement>form.querySelector('.blog__form-name')

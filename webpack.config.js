@@ -29,7 +29,7 @@ module.exports = {
 		index: ['@babel/polyfill', './html_css/index.ts']
 	},
 	output: {
-		filename: 'bundle.js',
+		filename: '[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 		clean: true,
 		assetModuleFilename: 'assets/[name][ext]',
@@ -40,9 +40,8 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin(
 			{
-				filename: 'bundle.css',
+				filename: '[name].[contenthash].css',
 			}
-
 		),
 	].concat(devMode ? [new BundleAnalyzerPlugin()] : []),
 	module: {
@@ -71,7 +70,8 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env']
+						presets: ['@babel/preset-env'],
+						cacheDirectory: true,
 					}
 				}
 			},
@@ -94,6 +94,11 @@ module.exports = {
 	optimization: {
 		minimize: true,
 		minimizer: devMode ? undefined : [new CssMinimizerPlugin()],
+	},
+	performance: {
+		hints: false,
+		maxEntrypointSize: 512000,
+		maxAssetSize: 512000
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js']
