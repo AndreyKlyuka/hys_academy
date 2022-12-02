@@ -18,6 +18,7 @@ function initPaginator(data: IPhotos[], selector: string) {
 		}
 	})
 }
+
 const updateCards = function (
 	data: IPhotos[],
 	selector: string,

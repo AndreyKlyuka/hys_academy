@@ -1,9 +1,13 @@
 import $ from 'jquery'
 import 'slick-carousel'
 
+
 import AbstractApp from '../models/app.model'
 
+
 import { photosData } from '../data/photos-data'
+import AbstractApp from '../models/app.model'
+
 
 import Menu from './mobile-menu'
 import Slider from './slider'
@@ -58,6 +62,7 @@ export default class App extends AbstractApp {
 		addStickyHeader()
 	}
 
+
 	protected initSlick(): void {
 		$(document).ready(function () {
 			$('.courses__cards-container').slick({
@@ -89,6 +94,7 @@ export default class App extends AbstractApp {
 		})
 	}
 
+
 	protected initForm(): void {
 		if (this._storage) {
 			const form = <HTMLFormElement>document.getElementById('form')
@@ -105,21 +111,26 @@ export default class App extends AbstractApp {
 				['formName', 'formPhone', 'formEmail']
 			)
 
+
 			nameInput.value = this._storage!.getFormInput<string>('formName')
 			phoneInput.value = this._storage!.getFormInput<string>('formPhone')
 			emailInput.value = this._storage!.getFormInput<string>('formEmail')
 
+
 			form.addEventListener('submit', (event) => {
 				event.preventDefault()
+
 
 				this._storage!.clearFormInput<string>('formName')
 				this._storage!.clearFormInput<string>('formPhone')
 				this._storage!.clearFormInput<string>('formEmail')
+
 
 				nameInput.value = ''
 				phoneInput.value = ''
 				emailInput.value = ''
 			})
 		} else console.error('Storage class is disabled')
+
 	}
 }

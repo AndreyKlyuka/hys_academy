@@ -1,3 +1,4 @@
+
 import debounce from 'lodash.debounce'
 
 import Storage from '../scripts/storage'
@@ -16,12 +17,14 @@ export default abstract class AbstractApp {
 		protected _menu: Menu | undefined
 	) {}
 
+
 	abstract init(): void
 
 	protected onAlbumChange(albumId: number): void {
 		fetch(`${this._baseUrl}${albumId}/photos?_start=0&_limit=5`)
 			.then((response) => response.json())
 			.then((data) => {
+
 				if (this._storage) {
 					this._storage?.setSliderData(data)
 					this._slider?.clearData()
@@ -54,4 +57,5 @@ export default abstract class AbstractApp {
 	protected abstract initHeader(): void
 	protected abstract initSlick(): void
 	protected abstract initForm(): void
+
 }

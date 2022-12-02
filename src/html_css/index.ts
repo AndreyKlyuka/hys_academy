@@ -3,6 +3,7 @@ import './style.css'
 
 import App from './scripts/app'
 
+
 import Slider from './scripts/slider'
 import Storage from './scripts/storage'
 import Select from './scripts/select'
@@ -14,5 +15,6 @@ const select = new Select('.prefers__select')
 const menu = new Menu('menu', '.header__menu')
 
 const app = new App({ storage, slider, select, menu })
+
 
 app.init()

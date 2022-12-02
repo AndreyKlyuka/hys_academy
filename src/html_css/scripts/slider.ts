@@ -1,10 +1,12 @@
 import debounce from 'lodash.debounce'
 
+
 import IPhotos from '../models/@types/photos.interface'
 import ISlider from '../models/slider.model'
 
 export default class Slider implements ISlider {
 	_slider: HTMLElement
+
 	_sliderElements: HTMLElement
 	_data!: IPhotos[]
 	cardsCount: number
@@ -38,6 +40,7 @@ export default class Slider implements ISlider {
 	clearData() {
 		this._sliderElements.innerHTML = ''
 	}
+
 	private initButtons() {
 		this._slider.addEventListener('click', (event) => {
 			const target = (<HTMLElement>event.target).closest('button')
@@ -54,7 +57,7 @@ export default class Slider implements ISlider {
 		})
 	}
 
-	scrollElement(selector: HTMLElement) {
+	private scrollElement(selector: HTMLElement) {
 		selector.scrollTo({
 			top: 0,
 			left: (this.cardWidth + 20) * this.slidesCounter,
