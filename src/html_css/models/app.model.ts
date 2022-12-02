@@ -16,13 +16,24 @@ export default abstract class AbstractApp {
 		fetch(`${this._baseUrl}${albumId}/photos?_start=0&_limit=5`)
 			.then((response) => response.json())
 			.then((data) => {
+
+				// this._slider.clearData()
+				// this._slider.setData(data)
+				this._storage.setSliderData(data)
 				this._slider.clearData()
-				this._slider.setData(data)
+				this._slider.setData(this._storage.getSliderData())
 			})
 			.catch((error) => {
-				console.log('Error: ', error)
+				console.log('Error: ', error.message)
 			})
 	}
+
+	protected abstract initSlider(): void
+	protected abstract initStorage(): void
+	protected abstract initSelect(): void
+	protected abstract initPaginator(): void
+	protected abstract initSlick(): void
+
 	protected abstract initForm(): void
 
 	protected abstract addListenerToInput(

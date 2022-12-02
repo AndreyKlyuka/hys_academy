@@ -2,16 +2,16 @@ import IPhotos from '../models/@types/photos.interface'
 
 const avatar = require('../images/courses/courses-avatar.png')
 
-export function paginator(selector: string, data: IPhotos[]) {
+export default function paginator(selector: string, data: IPhotos[]) {
 	initPaginator(data, selector)
 }
 
 function initPaginator(data: IPhotos[], selector: string) {
-	const paginator = document.querySelector(selector)
+	const paginator = <HTMLElement>document.querySelector(selector)
 
 	updateCards(data, selector, false)
 
-	paginator?.addEventListener('click', (event) => {
+	paginator.addEventListener('click', (event) => {
 		const target = <HTMLElement>event.target
 		if (target.tagName === 'BUTTON') {
 			updateCards(data, selector)?.call(target)
