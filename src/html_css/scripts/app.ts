@@ -2,7 +2,9 @@ import $ from 'jquery'
 import 'slick-carousel'
 import debounce from 'lodash.debounce'
 
+
 import paginator from './pagination'
+
 import Slider from './slider'
 import Storage from './storage'
 import Select from './select'
@@ -11,6 +13,7 @@ import IPhotos from '../models/@types/photos.interface'
 
 import { photosData } from '../data/photos-data'
 import AbstractApp from '../models/app.model'
+
 import Readonly from '../decorators/Readonly.decorator'
 
 export default class App extends AbstractApp {
@@ -36,8 +39,10 @@ export default class App extends AbstractApp {
 		this._storageData = this._storage.sliderData
 	}
 
+
 	protected initSlider() {
 		this._slider = new Slider('.prefers__slider', this._storageData)
+
 	}
 
 	protected initSelect() {
@@ -51,6 +56,7 @@ export default class App extends AbstractApp {
 	protected initPaginator() {
 		paginator('.blog__posts', this._storageData)
 	}
+
 
 	protected initSlick() {
 		$(document).ready(function () {
@@ -82,6 +88,11 @@ export default class App extends AbstractApp {
 			})
 		})
 	}
+
+
+		this.initForm()
+	}
+
 
 	protected initForm() {
 		const form = <HTMLFormElement>document.getElementById('form')

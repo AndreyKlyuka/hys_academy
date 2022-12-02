@@ -1,10 +1,12 @@
 import debounce from 'lodash.debounce'
 
+
 import IPhotos from '../models/@types/photos.interface'
 import ISlider from '../models/slider.model'
 
 export default class Slider implements ISlider {
 	_slider: HTMLElement
+
 	_sliderElements: HTMLElement
 	_data: IPhotos[]
 	cardsCount: number
@@ -29,7 +31,18 @@ export default class Slider implements ISlider {
 		this.initButtons()
 	}
 
-	initButtons() {
+	setData(data: IPhotos[]) {
+		const markup: string[] = this.createElement(data)
+		markup.forEach((markupEl) => {
+			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
+		})
+	}
+
+	clearData() {
+		this._sliderElements.innerHTML = ''
+	}
+
+	private initButtons() {
 		this._slider.addEventListener('click', (event) => {
 			const target = (<HTMLElement>event.target).closest('button')
 
@@ -45,7 +58,7 @@ export default class Slider implements ISlider {
 		})
 	}
 
-	scrollElement(selector: HTMLElement) {
+	private scrollElement(selector: HTMLElement) {
 		selector.scrollTo({
 			top: 0,
 			left: (this.cardWidth + 20) * this.slidesCounter,
@@ -53,12 +66,12 @@ export default class Slider implements ISlider {
 		})
 	}
 
-	checkSliderCounter(selector: HTMLElement) {
+	private checkSliderCounter(selector: HTMLElement) {
 		if (Math.floor(selector.scrollLeft / this.cardWidth) !== this.slidesCounter)
 			this.slidesCounter = Math.floor(selector.scrollLeft / this.cardWidth)
 	}
 
-	checkSliderEvents(this: Slider) {
+	private checkSliderEvents(this: Slider) {
 		const sliderEvents: string[] = ['DOMContentLoaded', 'resize']
 		sliderEvents.forEach((event) => {
 			window.addEventListener(
@@ -79,6 +92,7 @@ export default class Slider implements ISlider {
 		})
 	}
 
+
 	setData(data: IPhotos[]) {
 		const markup: string[] = this.createElement(data)
 		markup.forEach((markupEl) => {
@@ -91,6 +105,7 @@ export default class Slider implements ISlider {
 	}
 
 	createElement(data: IPhotos[]): string[] {
+
 		return data.map(
 			(el) =>
 				`<div class="prefers__item" style="background-image: url('${el.url}');">

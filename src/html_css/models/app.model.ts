@@ -16,6 +16,7 @@ export default abstract class AbstractApp {
 		fetch(`${this._baseUrl}${albumId}/photos?_start=0&_limit=5`)
 			.then((response) => response.json())
 			.then((data) => {
+
 				// this._slider.clearData()
 				// this._slider.setData(data)
 				this._storage.setSliderData(data)
@@ -32,6 +33,7 @@ export default abstract class AbstractApp {
 	protected abstract initSelect(): void
 	protected abstract initPaginator(): void
 	protected abstract initSlick(): void
+
 	protected abstract initForm(): void
 
 	protected abstract addListenerToInput(
