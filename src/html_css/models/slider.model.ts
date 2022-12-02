@@ -15,4 +15,6 @@ export default interface ISlider {
 	setData(data: IPhotos[]): void
 
 	clearData(): void
+
 }
+

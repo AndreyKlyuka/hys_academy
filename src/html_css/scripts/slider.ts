@@ -91,7 +91,20 @@ export default class Slider implements ISlider {
 		})
 	}
 
-	private createElement(data: IPhotos[]): string[] {
+
+	setData(data: IPhotos[]) {
+		const markup: string[] = this.createElement(data)
+		markup.forEach((markupEl) => {
+			this._sliderElements.insertAdjacentHTML('afterbegin', markupEl)
+		})
+	}
+
+	clearData() {
+		this._sliderElements.innerHTML = ''
+	}
+
+	createElement(data: IPhotos[]): string[] {
+
 		return data.map(
 			(el) =>
 				`<div class="prefers__item" style="background-image: url('${el.url}');">

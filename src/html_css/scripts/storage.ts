@@ -4,6 +4,7 @@ import IStorage from '../models/storage.model'
 
 import LocalStorage from '../decorators/LocalStorage.decorator'
 
+
 export default class Storage implements IStorage<IPhotos> {
 	@LocalStorage('sliderDate')
 	localData!: IPhotos[]

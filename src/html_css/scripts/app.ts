@@ -2,11 +2,13 @@ import $ from 'jquery'
 import 'slick-carousel'
 
 
+
 import AbstractApp from '../models/app.model'
 
 
 import { photosData } from '../data/photos-data'
 import AbstractApp from '../models/app.model'
+
 
 
 import Menu from './mobile-menu'
@@ -64,6 +66,7 @@ export default class App extends AbstractApp {
 
 
 	protected initSlick(): void {
+
 		$(document).ready(function () {
 			$('.courses__cards-container').slick({
 				mobileFirst: true,
@@ -92,7 +95,9 @@ export default class App extends AbstractApp {
 				],
 			})
 		})
+
 	}
+
 
 
 	protected initForm(): void {

@@ -77,12 +77,14 @@ module.exports = {
 			},
 			{
 				test: /\.tsx?$/i,
+
 				use: ['babel-loader', {
 					loader: 'ts-loader',
 					options: {
 						transpileOnly: true,
 					},
 				}],
+
 				exclude: /node_modules/,
 			},
 			{

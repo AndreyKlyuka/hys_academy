@@ -25,6 +25,7 @@ export default abstract class AbstractApp {
 			.then((response) => response.json())
 			.then((data) => {
 
+
 				if (this._storage) {
 					this._storage?.setSliderData(data)
 					this._slider?.clearData()
@@ -33,11 +34,13 @@ export default abstract class AbstractApp {
 					if (this._slider) this._slider.slidesCounter = 0
 					this._slider?.scrollElement(this._slider._sliderElements)
 				} else console.error('Storage class is disabled: cant change select')
+
 			})
 			.catch((error) => {
 				console.log('Error: ', error.message)
 			})
 	}
+
 
 	protected addListenerToInput(
 		inputElements: HTMLInputElement[],

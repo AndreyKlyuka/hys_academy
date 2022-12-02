@@ -3,8 +3,10 @@ import IPhotos from './@types/photos.interface'
 
 export default interface IStorage<T> {
 	localData: T[]
+
 	sliderData: T[]
 	selectOptionCounter: number
+
 
 	init(): void
 	getSliderData(): T[]
