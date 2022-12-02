@@ -8,25 +8,24 @@ export default class Slider implements ISlider {
 	_slider: HTMLElement
 
 	_sliderElements: HTMLElement
-	_data: IPhotos[]
+	_data!: IPhotos[]
 	cardsCount: number
 	cardWidth: number
 	slidesCounter: number
 
-	constructor(selector: string, data: IPhotos[]) {
+	constructor(selector: string) {
 		this._slider = <HTMLElement>document.querySelector(selector)
-		this._data = data
 		this._sliderElements = <HTMLElement>this._slider.children[1]
 
 		this.cardsCount = 3
 		this.cardWidth = 197
 		this.slidesCounter = 0
-
-		this.initSlider()
 	}
 
-	initSlider() {
+	initSlider(data: IPhotos[]) {
+		this._data = data
 		this.checkSliderEvents()
+		this.clearData()
 		this.setData(this._data)
 		this.initButtons()
 	}

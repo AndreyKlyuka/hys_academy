@@ -8,7 +8,9 @@ export default interface ISlider {
 	cardWidth: number
 	slidesCounter: number
 
-	initSlider(): void
+
+	initSlider(data: IPhotos[]): void
+
 
 	setData(data: IPhotos[]): void
 

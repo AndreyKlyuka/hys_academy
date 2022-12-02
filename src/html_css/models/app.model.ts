@@ -1,14 +1,22 @@
+
+import debounce from 'lodash.debounce'
+
 import Storage from '../scripts/storage'
 import Slider from '../scripts/slider'
+import Select from '../scripts/select'
 
-import IPhotos from './@types/photos.interface'
+import Menu from '../scripts/mobile-menu'
 
 export default abstract class AbstractApp {
-	abstract _slider: Slider
-	abstract _storage: Storage
-	abstract _storageData: IPhotos[]
-
 	private _baseUrl: string = 'https://jsonplaceholder.typicode.com/albums/'
+
+	constructor(
+		protected _storage: Storage | undefined,
+		protected _slider: Slider | undefined,
+		protected _select: Select | undefined,
+		protected _menu: Menu | undefined
+	) {}
+
 
 	abstract init(): void
 
@@ -17,27 +25,40 @@ export default abstract class AbstractApp {
 			.then((response) => response.json())
 			.then((data) => {
 
-				// this._slider.clearData()
-				// this._slider.setData(data)
-				this._storage.setSliderData(data)
-				this._slider.clearData()
-				this._slider.setData(this._storage.getSliderData())
+
+				if (this._storage) {
+					this._storage?.setSliderData(data)
+					this._slider?.clearData()
+					this._slider?.setData(this._storage.getSliderData())
+
+					if (this._slider) this._slider.slidesCounter = 0
+					this._slider?.scrollElement(this._slider._sliderElements)
+				} else console.error('Storage class is disabled: cant change select')
+
 			})
 			.catch((error) => {
 				console.log('Error: ', error.message)
 			})
 	}
 
-	protected abstract initSlider(): void
-	protected abstract initStorage(): void
-	protected abstract initSelect(): void
-	protected abstract initPaginator(): void
-	protected abstract initSlick(): void
 
-	protected abstract initForm(): void
-
-	protected abstract addListenerToInput(
+	protected addListenerToInput(
 		inputElements: HTMLInputElement[],
 		value: string[]
-	): void
+	): void {
+		inputElements.forEach((inputElements, index) => {
+			inputElements.addEventListener(
+				'input',
+				debounce((event) => {
+					this._storage?.setFormInput<string>(value[index], event.target.value)
+				}, 750)
+			)
+		})
+	}
+
+	protected abstract initPaginator(): void
+	protected abstract initHeader(): void
+	protected abstract initSlick(): void
+	protected abstract initForm(): void
+
 }

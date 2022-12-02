@@ -1,64 +1,72 @@
 import $ from 'jquery'
 import 'slick-carousel'
-import debounce from 'lodash.debounce'
 
 
-import paginator from './pagination'
 
-import Slider from './slider'
-import Storage from './storage'
-import Select from './select'
+import AbstractApp from '../models/app.model'
 
-import IPhotos from '../models/@types/photos.interface'
 
 import { photosData } from '../data/photos-data'
 import AbstractApp from '../models/app.model'
 
+
+
+import Menu from './mobile-menu'
+import Slider from './slider'
+import Storage from './storage'
+import Select from './select'
+import paginator from './pagination'
+import addStickyHeader from './sticky-header'
+
 import Readonly from '../decorators/Readonly.decorator'
 
+interface AppProps {
+	storage?: Storage
+	select?: Select
+	slider?: Slider
+	menu?: Menu
+}
 export default class App extends AbstractApp {
-	_slider!: Slider
-	_storage!: Storage
-	_select!: Select
-
-	_storageData!: IPhotos[]
+	constructor(props: AppProps) {
+		super(props.storage, props.slider, props.select, props.menu)
+	}
 
 	@Readonly(true)
 	public init() {
-		this.initStorage()
-		this.initSlider()
-		this.initSelect()
-		this.initSlick()
-		this.initForm()
-		this.initPaginator()
-	}
+		this._storage?.init()
 
-	protected initStorage() {
-		this._storage = new Storage()
-		this._storage.init()
-		this._storageData = this._storage.sliderData
-	}
+		this._slider?.initSlider(
+			this._storage !== undefined ? this._storage!.sliderData : photosData
+		)
 
+		this._select?.init(this.onAlbumChange.bind(this))
 
-	protected initSlider() {
-		this._slider = new Slider('.prefers__slider', this._storageData)
-
-	}
-
-	protected initSelect() {
-		this._select = new Select('.prefers__select', this.onAlbumChange.bind(this))
-
-		if (this._storage.sliderData) {
-			this._select._selector.selectedIndex = this._storage.selectOptionCounter
+		if (this._storage?.sliderData && this._select) {
+			this._select!._selector.selectedIndex = this._storage.selectOptionCounter
 		}
+
+		this._menu?.init()
+
+		this.initSlick()
+
+		this.initForm()
+
+		this.initPaginator()
+
+		this.initHeader()
 	}
 
-	protected initPaginator() {
-		paginator('.blog__posts', this._storageData)
+	protected initPaginator(): void {
+		paginator('.blog__posts', photosData)
+	}
+
+	protected initHeader(): void {
+		addStickyHeader()
 	}
 
 
-	protected initSlick() {
+	protected initSlick(): void {
+
 		$(document).ready(function () {
 			$('.courses__cards-container').slick({
 				mobileFirst: true,
@@ -87,52 +95,47 @@ export default class App extends AbstractApp {
 				],
 			})
 		})
+
 	}
 
 
-		this.initForm()
-	}
 
-
-	protected initForm() {
-		const form = <HTMLFormElement>document.getElementById('form')
-		const nameInput = <HTMLInputElement>form.querySelector('.blog__form-name')
-		const phoneInput = <HTMLInputElement>form.querySelector('.blog__form-phone')
-		const emailInput = <HTMLInputElement>form.querySelector('.blog__form-email')
-
-		this.addListenerToInput(
-			[nameInput, phoneInput, emailInput],
-			['formName', 'formPhone', 'formEmail']
-		)
-
-		nameInput.value = this._storage.getFormInput<string>('formName')
-		phoneInput.value = this._storage.getFormInput<string>('formPhone')
-		emailInput.value = this._storage.getFormInput<string>('formEmail')
-
-		form.addEventListener('submit', (event) => {
-			event.preventDefault()
-
-			this._storage.clearFormInput<string>('formName')
-			this._storage.clearFormInput<string>('formPhone')
-			this._storage.clearFormInput<string>('formEmail')
-
-			nameInput.value = ''
-			phoneInput.value = ''
-			emailInput.value = ''
-		})
-	}
-
-	protected addListenerToInput(
-		inputElements: HTMLInputElement[],
-		value: string[]
-	) {
-		inputElements.forEach((inputElements, index) => {
-			inputElements.addEventListener(
-				'input',
-				debounce((event) => {
-					this._storage.setFormInput<string>(value[index], event.target.value)
-				}, 750)
+	protected initForm(): void {
+		if (this._storage) {
+			const form = <HTMLFormElement>document.getElementById('form')
+			const nameInput = <HTMLInputElement>form.querySelector('.blog__form-name')
+			const phoneInput = <HTMLInputElement>(
+				form.querySelector('.blog__form-phone')
 			)
-		})
+			const emailInput = <HTMLInputElement>(
+				form.querySelector('.blog__form-email')
+			)
+
+			this.addListenerToInput(
+				[nameInput, phoneInput, emailInput],
+				['formName', 'formPhone', 'formEmail']
+			)
+
+
+			nameInput.value = this._storage!.getFormInput<string>('formName')
+			phoneInput.value = this._storage!.getFormInput<string>('formPhone')
+			emailInput.value = this._storage!.getFormInput<string>('formEmail')
+
+
+			form.addEventListener('submit', (event) => {
+				event.preventDefault()
+
+
+				this._storage!.clearFormInput<string>('formName')
+				this._storage!.clearFormInput<string>('formPhone')
+				this._storage!.clearFormInput<string>('formEmail')
+
+
+				nameInput.value = ''
+				phoneInput.value = ''
+				emailInput.value = ''
+			})
+		} else console.error('Storage class is disabled')
+
 	}
 }

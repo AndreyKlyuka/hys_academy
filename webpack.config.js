@@ -5,6 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+
 const mode = process.env.NODE_ENV || 'development'
 
 const devMode = mode === 'development'
@@ -26,7 +29,7 @@ module.exports = {
 		index: ['@babel/polyfill', './html_css/index.ts']
 	},
 	output: {
-		filename: 'bundle.js',
+		filename: '[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 		clean: true,
 		assetModuleFilename: 'assets/[name][ext]',
@@ -37,11 +40,10 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin(
 			{
-				filename: 'bundle.css',
+				filename: '[name].[contenthash].css',
 			}
-
-		)
-	],
+		),
+	].concat(devMode ? [new BundleAnalyzerPlugin()] : []),
 	module: {
 		rules: [
 			{
@@ -68,13 +70,21 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env']
+						presets: ['@babel/preset-env'],
+						cacheDirectory: true,
 					}
 				}
 			},
 			{
 				test: /\.tsx?$/i,
-				use: ['babel-loader', 'ts-loader'],
+
+				use: ['babel-loader', {
+					loader: 'ts-loader',
+					options: {
+						transpileOnly: true,
+					},
+				}],
+
 				exclude: /node_modules/,
 			},
 			{
@@ -85,7 +95,12 @@ module.exports = {
 	},
 	optimization: {
 		minimize: true,
-		minimizer: devMode ? undefined : [new CssMinimizerPlugin(), new TerserPlugin()],
+		minimizer: devMode ? undefined : [new CssMinimizerPlugin()],
+	},
+	performance: {
+		hints: false,
+		maxEntrypointSize: 512000,
+		maxAssetSize: 512000
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js']
